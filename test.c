@@ -20,5 +20,8 @@ int main(void)
         printf("get successfully! the value is %d.\n", p->data);
     else
         puts("error occurs!");
+    printf("Length of List is %d\n", Length(L));
+    printf("Length of null is %d\n", Length(NULL));
+    printf("Length of null list is %d\n", Length((LinkList)malloc(sizeof(LNode))));
     return 0;
 }

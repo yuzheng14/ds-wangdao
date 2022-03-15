@@ -23,5 +23,6 @@ bool ListDelete(LinkList *L,int i, ElemType *e);
 bool DeleteNode(LNode *p);
 bool GetElem(LinkList L, int i, LNode **p);
 bool LocateElem(LinkList L, ElemType e, LNode **p);
+int Length(LinkList L);
 
 #endif

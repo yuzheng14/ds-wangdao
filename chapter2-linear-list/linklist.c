@@ -152,3 +152,14 @@ bool LocateElem(LinkList L, ElemType e, LNode **p)
     }else 
         return false;
 }
+
+int Length(LinkList L)
+{
+    if(!L)
+        return 0;
+    LNode *current=L;
+    int len=0;
+    while(++len&&current->next)
+        current=current->next;
+    return len-1;
+}
