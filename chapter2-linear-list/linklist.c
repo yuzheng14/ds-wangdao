@@ -123,7 +123,7 @@ bool DeleteNode(LNode *p)
 
 bool GetElem(LinkList L, int i, LNode **p)
 {
-    if (!L)
+    if (!L || i < 0)
         return false;
     int j = 0;
     LNode *current_node = L;
@@ -131,14 +131,7 @@ bool GetElem(LinkList L, int i, LNode **p)
         current_node = current_node->next;
     if (j == i && current_node->next)
     {
-// #define debug
-#if defined debug
-        printf("i:%d\np:%p\ncurrent_node->next:%p\n", i, p, current_node->next);
-#endif
         (*p) = current_node->next;
-#if defined debug
-        printf("i:%d\np:%p\ncurrent_node->next:%p\n", i, p, current_node->next);
-#endif
         return true;
     }
     else
