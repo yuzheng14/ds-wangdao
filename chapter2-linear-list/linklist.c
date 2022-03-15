@@ -181,6 +181,20 @@ bool ListTailInsert(LinkList *L)
     return true;
 }
 
+bool ListHeadInsert(LinkList *L)
+{
+    ElemType e;
+    InitList(L);
+    while(scanf("%d",&e)!=EOF)
+    {
+        LNode *new=(LNode *)malloc(sizeof(LNode));
+        new->data=e;
+        new->next=(*L)->next;
+        (*L)->next=new;
+    }
+    return true;
+}
+
 int main(void)
 {
     LinkList L;

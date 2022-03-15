@@ -25,5 +25,6 @@ bool GetElem(LinkList L, int i, LNode **p);
 bool LocateElem(LinkList L, ElemType e, LNode **p);
 int Length(LinkList L);
 bool ListTailInsert(LinkList *L);
+bool ListHeadInsert(LinkList *L);
 
 #endif
