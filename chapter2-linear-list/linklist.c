@@ -198,12 +198,9 @@ bool ListHeadInsert(LinkList *L)
 int main(void)
 {
     LinkList L;
+    ListHeadInsert(&L);
+    PrintList(L);
     ListTailInsert(&L);
-    LNode *p;
-    GetElem(L, 2, &p);
-    printf("%d\n", p->data);
-    ListInsert(&L, 2, 99);
     PrintList(L);
-    ListDelete(&L, 4, NULL);
-    PrintList(L);
+    return 0;
 }
