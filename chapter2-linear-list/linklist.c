@@ -137,3 +137,18 @@ bool GetElem(LinkList L, int i, LNode **p)
     else
         return false;
 }
+
+bool LocateElem(LinkList L, ElemType e, LNode **p)
+{
+    if(!L)
+        return false;
+    LNode *current_node=L;
+    while(current_node->next&&current_node->next->data!=e)
+        current_node=current_node->next;
+    if(current_node->next&& current_node->next->data==e)
+    {
+        *p=current_node->next;
+        return true;
+    }else 
+        return false;
+}

@@ -12,11 +12,11 @@ int main(void)
     ListInsert(&L, 4, 3);
     PrintList(L);
     LNode *p;
-    if (GetElem(L, 2, &p))
+    if (LocateElem(L, 2, &p))
         printf("get successfully! the value is %d.\n", p->data);
     else
         puts("error occurs!");
-    if (GetElem(L, 3, &p))
+    if (LocateElem(L, 3, &p))
         printf("get successfully! the value is %d.\n", p->data);
     else
         puts("error occurs!");
