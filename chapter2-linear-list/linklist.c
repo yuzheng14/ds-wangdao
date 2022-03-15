@@ -101,7 +101,8 @@ bool ListDelete(LinkList *L, int i, ElemType *e)
     if (j == i && current_node->next)
     {
         LNode *temp = current_node->next;
-        *e = temp->data;
+        if (e)
+            *e = temp->data;
         current_node->next = temp->next;
         free(temp);
         return true;
@@ -140,26 +141,55 @@ bool GetElem(LinkList L, int i, LNode **p)
 
 bool LocateElem(LinkList L, ElemType e, LNode **p)
 {
-    if(!L)
+    if (!L)
         return false;
-    LNode *current_node=L;
-    while(current_node->next&&current_node->next->data!=e)
-        current_node=current_node->next;
-    if(current_node->next&& current_node->next->data==e)
+    LNode *current_node = L;
+    while (current_node->next && current_node->next->data != e)
+        current_node = current_node->next;
+    if (current_node->next && current_node->next->data == e)
     {
-        *p=current_node->next;
+        *p = current_node->next;
         return true;
-    }else 
+    }
+    else
         return false;
 }
 
 int Length(LinkList L)
 {
-    if(!L)
+    if (!L)
         return 0;
-    LNode *current=L;
-    int len=0;
-    while(++len&&current->next)
-        current=current->next;
-    return len-1;
+    LNode *current = L;
+    int len = 0;
+    while (++len && current->next)
+        current = current->next;
+    return len - 1;
+}
+
+bool ListTailInsert(LinkList *L)
+{
+    ElemType e;
+    InitList(L);
+    LNode *tail = *L;
+    while (scanf("%d", &e) != EOF)
+    {
+        tail->next = (LNode *)malloc(sizeof(LNode));
+        tail = tail->next;
+        tail->data = e;
+    }
+    tail->next = NULL;
+    return true;
+}
+
+int main(void)
+{
+    LinkList L;
+    ListTailInsert(&L);
+    LNode *p;
+    GetElem(L, 2, &p);
+    printf("%d\n", p->data);
+    ListInsert(&L, 2, 99);
+    PrintList(L);
+    ListDelete(&L, 4, NULL);
+    PrintList(L);
 }
