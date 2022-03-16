@@ -26,3 +26,15 @@ bool InsertNextNode(DNode *p, DNode *s)
     s->piror = p;
     return true;
 }
+
+bool DeleteNextNode(DNode *p)
+{
+    if (!p||!p->next)
+        return false;
+    DNode *next_node=p->next;
+    p->next = next_node->next;
+    if (next_node->next)
+        next_node->next->piror = p;
+    free(p);
+    return true;
+}

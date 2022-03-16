@@ -19,5 +19,6 @@ typedef struct DNode
 bool InitDLinkList(DLinklist *L);
 bool Empty(DLinklist L);
 bool InsertNextNode(DNode *p, DNode *s);
+bool DeleteNextNode(DNode *p);
 
 #endif
