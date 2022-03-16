@@ -9,3 +9,8 @@ bool InitDLinkList(DLinklist *L)
     (*L)->piror=NULL;
     return true;
 }
+
+bool Empty(DLinklist L)
+{
+    return L->next==NULL;
+}

@@ -17,5 +17,6 @@ typedef struct DNode{
  } DNode, *DLinklist;
 
 bool InitDLinkList(DLinklist *L);
+bool Empty(DLinklist L);
 
 #endif
