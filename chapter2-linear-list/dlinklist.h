@@ -10,13 +10,14 @@
 typedef int ElemType;
 #endif
 
-
-typedef struct DNode{
+typedef struct DNode
+{
     ElemType data;
-    struct DNode *next,*piror;
- } DNode, *DLinklist;
+    struct DNode *next, *piror;
+} DNode, *DLinklist;
 
 bool InitDLinkList(DLinklist *L);
 bool Empty(DLinklist L);
+bool InsertNextNode(DNode *p, DNode *s);
 
 #endif
