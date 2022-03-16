@@ -38,3 +38,14 @@ bool DeleteNextNode(DNode *p)
     free(p);
     return true;
 }
+
+bool DestroyList(DLinklist *L)
+{
+    if(!(*L))
+        return false;
+    while((*L)->next)
+        DeleteNextNode((*L));
+    free((*L));
+    (*L)=NULL;
+    return true;
+}
