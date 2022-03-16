@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 #if !defined DLINKLIST_H
 #define DLINKLIST_H
@@ -13,5 +15,7 @@ typedef struct DNode{
     ElemType data;
     struct DNode *next,*piror;
  } DNode, *DLinklist;
+
+bool InitDLinkList(DLinklist *L);
 
 #endif
