@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 #if !defined SQSTACK_H
 #define SQSTACK_H
@@ -21,5 +22,7 @@ typedef struct{
     int top;
 } SqStack;
 #endif
+
+bool InitStack(SqStack *S);
 
 #endif
