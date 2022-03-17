@@ -31,7 +31,7 @@ bool Pop(LiStack *S, ElemType *e)
         return false;
     if (e)
         *e = (*S)->next->data;
-    LinkNode *current=(*S)->next;
+    LinkNode *current = (*S)->next;
     (*S)->next = current->next;
     free(current);
     return true;
