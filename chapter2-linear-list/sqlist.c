@@ -26,7 +26,8 @@ bool ListDelete(SqList *L, int i, ElemType *e)
     if (i < 1 || i > L->length)
         return false;
     int j;
-    *e = L->data[i - 1];
+    if (!e)
+        *e = L->data[i - 1];
     for (j = i; j < L->length; j++)
         L->data[j - 1] = L->data[j];
     L->length--;
@@ -50,7 +51,7 @@ bool LocateElem(SqList L, int *i, ElemType e)
     {
         if (L.data[j] == e)
         {
-            *i = j+1;
+            *i = j + 1;
             return true;
         }
     }
