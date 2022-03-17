@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #if !defined LISTACK_H
 #define LISTACK_H
@@ -19,5 +20,7 @@ typedef struct LinkNode
     struct LinkNode *next;
 } LinkNode,*LiStack;
 #endif
+
+bool InitStack(LiStack *S);
 
 #endif
