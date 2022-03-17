@@ -18,3 +18,12 @@ bool Push(SqStack *S, ElemType e)
     S->data[++(S->top)]=e;
     return true;
 }
+
+int main(void)
+{
+    SqStack S;
+    InitStack(&S);
+    Push(&S,1);
+    printf("top:%d\ndata:%d\n",S.top,S.data[S.top]);
+    return 0;
+}
