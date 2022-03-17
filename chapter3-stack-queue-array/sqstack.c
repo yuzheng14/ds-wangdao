@@ -13,7 +13,7 @@ bool StackEmpty(SqStack S)
 
 bool Push(SqStack *S, ElemType e)
 {
-    if (S->top == MaxSize)
+    if (S->top == MaxSize - 1)
         return false;
     S->data[++(S->top)] = e;
     return true;
