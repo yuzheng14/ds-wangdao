@@ -22,5 +22,6 @@ typedef struct LinkNode
 #endif
 
 bool InitStack(LiStack *S);
+bool Push(LiStack *S,ElemType e);
 
 #endif
