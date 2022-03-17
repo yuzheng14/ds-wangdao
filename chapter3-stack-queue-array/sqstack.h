@@ -17,7 +17,8 @@ typedef int ElemType;
 
 #if !defined SQSTACK
 #define SQSTACK
-typedef struct{
+typedef struct
+{
     ElemType data[MaxSize];
     int top;
 } SqStack;
@@ -25,6 +26,6 @@ typedef struct{
 
 bool InitStack(SqStack *S);
 bool StackEmpty(SqStack S);
-
+bool Push(SqStack *S, ElemType e);
 
 #endif
