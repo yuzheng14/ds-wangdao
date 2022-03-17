@@ -44,25 +44,25 @@ bool GetTop(LiStack S, ElemType *e)
     return true;
 }
 
-int main (void)
+int main(void)
 {
     LiStack S;
     InitStack(&S);
-    if(StackEmpty(S))
+    if (StackEmpty(S))
         puts("当前栈为空");
-    else 
+    else
         puts("当前栈不为空");
-    Push(&S,1);
-    Push(&S,2);
-    Push(&S,3);
-    Push(&S,4);
-    Push(&S,5);
-    Push(&S,6);
+    Push(&S, 1);
+    Push(&S, 2);
+    Push(&S, 3);
+    Push(&S, 4);
+    Push(&S, 5);
+    Push(&S, 6);
     int e;
-    while(!StackEmpty(S))
+    while (!StackEmpty(S))
     {
-        Pop(&S,&e);
-        printf("%-3d",e);
+        Pop(&S, &e);
+        printf("%-3d", e);
     }
     putchar('\n');
     return 0;
