@@ -2,26 +2,23 @@
 
 bool InitStack(LiStack *S)
 {
-    *S = (LinkNode *)malloc(sizeof(LinkNode));
-    if (!S)
-        return false;
-    (*S)->next = NULL;
+    (*S) = NULL;
     return true;
 }
 
 bool StackEmpty(LiStack S)
 {
-    return S->next == NULL || !S;
+    return S == NULL;
 }
 
 bool Push(LiStack *S, ElemType e)
 {
-    if (!(*S))
-        return false;
     LinkNode *new = (LinkNode *)malloc(sizeof(LinkNode));
+    if(!new)
+        return false;
     new->data = e;
-    new->next = (*S)->next;
-    (*S)->next = new;
+    new->next = (*S);
+    (*S) = new;
     return true;
 }
 
@@ -30,9 +27,9 @@ bool Pop(LiStack *S, ElemType *e)
     if (StackEmpty(*S))
         return false;
     if (e)
-        *e = (*S)->next->data;
-    LinkNode *current = (*S)->next;
-    (*S)->next = current->next;
+        *e = (*S)->data;
+    LinkNode *current = (*S);
+    (*S) = current->next;
     free(current);
     return true;
 }
@@ -42,7 +39,7 @@ bool GetTop(LiStack S, ElemType *e)
     if (StackEmpty(S))
         return false;
     if (e)
-        *e = S->next->data;
+        *e = S->data;
     return true;
 }
 
