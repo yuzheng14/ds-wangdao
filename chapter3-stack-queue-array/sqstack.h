@@ -24,5 +24,6 @@ typedef struct{
 #endif
 
 bool InitStack(SqStack *S);
+bool StackEmpty(SqStack S);
 
 #endif
