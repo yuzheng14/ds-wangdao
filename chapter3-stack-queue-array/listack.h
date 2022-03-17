@@ -24,5 +24,6 @@ typedef struct LinkNode
 bool InitStack(LiStack *S);
 bool StackEmpty(LiStack S);
 bool Push(LiStack *S,ElemType e);
+bool Pop(LiStack *S,ElemType *e);
 
 #endif
