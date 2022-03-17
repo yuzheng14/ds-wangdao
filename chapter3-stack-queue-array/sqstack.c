@@ -35,11 +35,11 @@ int main(void)
     InitStack(&S);
     Push(&S, 1);
     printf("top:%d\ndata:%d\n", S.top, S.data[S.top]);
-    Pop(&S,NULL);
-    printf("top:%d\n",S.top);
+    Pop(&S, NULL);
+    printf("top:%d\n", S.top);
     Push(&S, 2);
     int e;
-    Pop(&S,&e);
-    printf("top:%d\n",S.top);
+    Pop(&S, &e);
+    printf("top:%d\n", S.top);
     return 0;
 }
