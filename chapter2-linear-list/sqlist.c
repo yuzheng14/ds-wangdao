@@ -26,7 +26,7 @@ bool ListDelete(SqList *L, int i, ElemType *e)
     if (i < 1 || i > L->length)
         return false;
     int j;
-    if (!e)
+    if (e)
         *e = L->data[i - 1];
     for (j = i; j < L->length; j++)
         L->data[j - 1] = L->data[j];
