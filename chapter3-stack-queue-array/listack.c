@@ -9,6 +9,13 @@ bool InitStack(LiStack *S)
     return true;
 }
 
+bool StackEmpty(LiStack S)
+{
+    if (!S)
+        return false;
+    return S->next == NULL;
+}
+
 bool Push(LiStack *S, ElemType e)
 {
     if (!(*S))
