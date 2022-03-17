@@ -29,6 +29,15 @@ bool Pop(SqStack *S, ElemType *e)
     return true;
 }
 
+bool GetTop(SqStack S, ElemType *e)
+{
+    if(StackEmpty(S))
+        return false;
+    if(e)
+        *e=S.data[S.top];
+    return true;
+}
+
 int main(void)
 {
     SqStack S;

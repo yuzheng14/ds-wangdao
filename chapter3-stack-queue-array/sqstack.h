@@ -28,5 +28,6 @@ bool InitStack(SqStack *S);
 bool StackEmpty(SqStack S);
 bool Push(SqStack *S, ElemType e);
 bool Pop(SqStack *S, ElemType *e);
+bool GetTop(SqStack S, ElemType *e);
 
 #endif
