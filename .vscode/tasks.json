@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "chapter2-linear-list/linklist.c",
+                // "chapter2-linear-list/linklist.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
