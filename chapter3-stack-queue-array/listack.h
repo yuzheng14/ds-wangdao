@@ -25,5 +25,6 @@ bool InitStack(LiStack *S);
 bool StackEmpty(LiStack S);
 bool Push(LiStack *S,ElemType e);
 bool Pop(LiStack *S,ElemType *e);
+bool GetTop(LiStack S, ElemType *e);
 
 #endif

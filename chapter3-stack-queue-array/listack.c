@@ -34,3 +34,12 @@ bool Pop(LiStack *S, ElemType *e)
     (*S)->next = (*S)->next->next;
     return true;
 }
+
+bool GetTop(LiStack S, ElemType *e)
+{
+    if (StackEmpty(S))
+        return false;
+    if (e)
+        *e = S->next->data;
+    return true;
+}
