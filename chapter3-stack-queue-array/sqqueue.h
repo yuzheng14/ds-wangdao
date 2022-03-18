@@ -27,6 +27,6 @@ typedef struct
 bool InitQueue(SqQueue *Q);
 bool QueueEmpty(SqQueue Q);
 bool EnQueue(SqQueue *Q, ElemType e);
-bool DeQueue(SqQueue)
+bool DeQueue(SqQueue *Q, ElemType *e);
 
 #endif

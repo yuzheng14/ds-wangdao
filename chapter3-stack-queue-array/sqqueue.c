@@ -19,3 +19,13 @@ bool EnQueue(SqQueue *Q, ElemType e)
     Q->data[Q->rear++] = e;
     return true;
 }
+
+bool DeQueue(SqQueue *Q, ElemType *e)
+{
+    if (!Q || QueueEmpty(*Q))
+        return false;
+    if (e)
+        *e = Q->data[Q->rear];
+    Q->rear--;
+    return true;
+}
