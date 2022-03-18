@@ -2,8 +2,7 @@
 
 bool InitQueue(SqQueue *Q)
 {
-    Q->font = 0;
-    Q->rear = 0;
+    Q->font = Q->rear = 0;
     return true;
 }
 
