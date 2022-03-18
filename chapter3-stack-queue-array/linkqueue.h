@@ -27,4 +27,6 @@ typedef struct
 } LinkQueue;
 #endif
 
+bool InitQueue(LinkQueue *Q);
+
 #endif
