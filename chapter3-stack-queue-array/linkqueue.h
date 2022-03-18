@@ -29,5 +29,6 @@ typedef struct
 
 bool InitQueue(LinkQueue *Q);
 bool EnQueue(LinkQueue *Q, ElemType e);
+bool QueueEmpty(LinkQueue Q);
 
 #endif

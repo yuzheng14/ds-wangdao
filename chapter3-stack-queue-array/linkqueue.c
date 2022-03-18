@@ -21,3 +21,8 @@ bool EnQueue(LinkQueue *Q, ElemType e)
     Q->rear->next = new_node;
     return true;
 }
+
+bool QueueEmpty(LinkQueue Q)
+{
+    return Q.front==Q.rear;
+}
