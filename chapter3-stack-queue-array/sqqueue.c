@@ -15,7 +15,8 @@ bool EnQueue(SqQueue *Q, ElemType e)
 {
     if (!Q || (Q->rear + 1) % MaxSize == Q->font)
         return false;
-    Q->data[Q->rear++] = e;
+    Q->data[Q->rear] = e;
+    Q->rear = (Q->rear + 1) % MaxSize;
     return true;
 }
 
