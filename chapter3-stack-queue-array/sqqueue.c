@@ -23,9 +23,9 @@ bool DeQueue(SqQueue *Q, ElemType *e)
 {
     if (!Q || QueueEmpty(*Q))
         return false;
+    Q->rear--;
     if (e)
         *e = Q->data[Q->rear];
-    Q->rear--;
     return true;
 }
 
