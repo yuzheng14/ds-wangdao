@@ -8,3 +8,16 @@ bool InitQueue(LinkQueue *Q)
     Q->front->next = NULL;
     return true;
 }
+
+bool EnQueue(LinkQueue *Q, ElemType e)
+{
+    if (!Q)
+        return false;
+    LinkNode *new_node = (LinkNode *)malloc(sizeof(LinkNode));
+    if (!new_node)
+        return false;
+    new_node->data = e;
+    new_node->next = NULL;
+    Q->rear->next = new_node;
+    return true;
+}

@@ -23,10 +23,11 @@ typedef struct LinkNode
 #define LINK_QUEUE
 typedef struct
 {
-    LinkNode *front,*rear;
+    LinkNode *front, *rear;
 } LinkQueue;
 #endif
 
 bool InitQueue(LinkQueue *Q);
+bool EnQueue(LinkQueue *Q, ElemType e);
 
 #endif
