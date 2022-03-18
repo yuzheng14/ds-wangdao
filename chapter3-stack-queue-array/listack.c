@@ -43,6 +43,16 @@ bool GetTop(LiStack S, ElemType *e)
     return true;
 }
 
+bool DestroyStack(LiStack *S)
+{
+    if(!(*S))
+        return false;
+    while(StackEmpty(*S))
+        Pop(S,NULL);
+    free(S);
+    return true;
+}
+
 int main(void)
 {
     LiStack S;
