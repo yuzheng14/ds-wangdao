@@ -6,3 +6,8 @@ bool InitQueue(SqQueue *Q)
     Q->rear = 0;
     return true;
 }
+
+bool QueueEmpty(SqQueue Q)
+{
+    return Q.font == Q.rear;
+}

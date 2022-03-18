@@ -17,13 +17,14 @@ typedef int ElemType;
 
 #if !defined SQ_QUEUE
 #define SQ_QUEUE
-typedef struct 
+typedef struct
 {
     ElemType data[MaxSize];
-    int font,rear;
+    int font, rear;
 } SqQueue;
 #endif
 
 bool InitQueue(SqQueue *Q);
+bool QueueEmpty(SqQueue Q);
 
 #endif
