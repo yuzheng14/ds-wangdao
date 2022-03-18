@@ -24,20 +24,20 @@ bool EnQueue(LinkQueue *Q, ElemType e)
 
 bool QueueEmpty(LinkQueue Q)
 {
-    return Q.front==Q.rear;
+    return Q.front == Q.rear;
 }
 
 bool DeQueue(LinkQueue *Q, ElemType *e)
 {
-    if(!Q||QueueEmpty(*Q))
+    if (!Q || QueueEmpty(*Q))
         return false;
     LinkNode *current = Q->front->next;
-    if(e)
-        *e=current->data;
-    Q->front->next=current->next;
+    if (e)
+        *e = current->data;
+    Q->front->next = current->next;
     // 如果要删除的结点是最后一个结点则需要单独处理
-    if(Q->rear==current)
-        Q->rear=Q->front;
+    if (Q->rear == current)
+        Q->rear = Q->front;
     free(current);
     return true;
 }
