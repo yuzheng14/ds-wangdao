@@ -29,3 +29,12 @@ bool DeQueue(SqQueue *Q, ElemType *e)
     Q->rear--;
     return true;
 }
+
+bool GetHead(SqQueue Q, ElemType *e)
+{
+    if (!Q || QueueEmpty(Q))
+        return false;
+    if (e)
+        *e = Q.data[Q.rear];
+    return true;
+}

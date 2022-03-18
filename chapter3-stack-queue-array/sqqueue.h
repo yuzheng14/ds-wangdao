@@ -28,5 +28,6 @@ bool InitQueue(SqQueue *Q);
 bool QueueEmpty(SqQueue Q);
 bool EnQueue(SqQueue *Q, ElemType e);
 bool DeQueue(SqQueue *Q, ElemType *e);
+bool GetHead(SqQueue Q, ElemType *e);
 
 #endif
