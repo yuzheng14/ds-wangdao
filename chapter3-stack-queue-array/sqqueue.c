@@ -24,9 +24,9 @@ bool DeQueue(SqQueue *Q, ElemType *e)
 {
     if (!Q || QueueEmpty(*Q))
         return false;
-    Q->rear--;
     if (e)
-        *e = Q->data[Q->rear];
+        *e = Q->data[Q->font];
+    Q->font = (Q->font + 1) % MaxSize;
     return true;
 }
 
