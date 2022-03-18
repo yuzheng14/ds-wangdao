@@ -24,4 +24,6 @@ typedef struct
 } SqQueue;
 #endif
 
+bool InitQueue(SqQueue *Q);
+
 #endif
