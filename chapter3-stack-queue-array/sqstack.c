@@ -13,7 +13,7 @@ bool StackEmpty(SqStack S)
 
 bool Push(SqStack *S, ElemType e)
 {
-    if (S->top == MaxSize - 1)
+    if (!S || S->top == MaxSize - 1)
         return false;
     S->data[++(S->top)] = e;
     return true;
@@ -31,10 +31,10 @@ bool Pop(SqStack *S, ElemType *e)
 
 bool GetTop(SqStack S, ElemType *e)
 {
-    if(StackEmpty(S))
+    if (StackEmpty(S))
         return false;
-    if(e)
-        *e=S.data[S.top];
+    if (e)
+        *e = S.data[S.top];
     return true;
 }
 
