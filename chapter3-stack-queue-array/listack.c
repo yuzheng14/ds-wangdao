@@ -47,9 +47,8 @@ bool DestroyStack(LiStack *S)
 {
     if(!(*S))
         return false;
-    while(StackEmpty(*S))
+    while(!StackEmpty(*S))
         Pop(S,NULL);
-    free(S);
     return true;
 }
 
