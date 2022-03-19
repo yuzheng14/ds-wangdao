@@ -41,3 +41,11 @@ bool DeQueue(LinkQueue *Q, ElemType *e)
     free(current);
     return true;
 }
+
+bool GetHead(LinkQueue Q, ElemType *e)
+{
+    if (QueueEmpty(Q) || !e)
+        return false;
+    *e = Q.front->next->data;
+    return true;
+}

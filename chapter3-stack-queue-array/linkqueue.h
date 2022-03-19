@@ -31,6 +31,6 @@ bool InitQueue(LinkQueue *Q);
 bool EnQueue(LinkQueue *Q, ElemType e);
 bool QueueEmpty(LinkQueue Q);
 bool DeQueue(LinkQueue *Q, ElemType *e);
-// TODO 获取队头元素
+bool GetHead(LinkQueue Q, ElemType *e);
 
 #endif
