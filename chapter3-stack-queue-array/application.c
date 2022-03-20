@@ -118,8 +118,6 @@ void puts_true(bool boolean)
         puts("false");
 }
 
-// TODO compute_expression()
-
 int main(void)
 {
     char *brackets = "{[()()]}((())(())())";
