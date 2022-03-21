@@ -25,6 +25,26 @@ int Index(SString S, SString T)
     return 0;
 }
 
+int Index_KMP(SString S, SString T, int next[])
+{
+    if (S.length < T.length)
+        return 0;
+    int i = 1, j = 1;
+    while (i <= S.length && j <= T.length)
+    {
+        if (j == 0 || S.ch[i] == T.ch[j])
+        {
+            i++;
+            j++;
+        }
+        else
+            j = next[j];
+    }
+    if (j > T.length)
+        return i - T.length;
+    return 0;
+}
+
 int main(void)
 {
     SString S;
