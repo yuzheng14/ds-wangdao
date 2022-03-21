@@ -7,22 +7,21 @@ int Index(SString S, SString T)
     if (S.length < T.length)
         return 0;
     int i = 1, j = 1;
-    while (i + T.length - 1 <= S.length)
+    while (i <= S.length && j <= T.length)
     {
-        int k;
-        for (k = 0; k < T.length; k++)
+        if (S.ch[i] == T.ch[j])
         {
-            if (S.ch[i] != T.ch[j])
-                break;
             i++;
             j++;
         }
-        if (j > T.length)
-            return i - T.length;
-
-        i = i - j + 2;
-        j = 1;
+        else
+        {
+            i = i - j + 2;
+            j = 1;
+        }
     }
+    if (j > T.length)
+        return i - T.length;
     return 0;
 }
 
