@@ -25,6 +25,26 @@ int Index(SString S, SString T)
     return 0;
 }
 
+void get_next(SString T, int *next)
+{
+    int i = 1;
+    int j = 0;
+    next[1] = 0;
+    while (i < T.length)
+    {
+        if (j == 0 || T.ch[i] == T.ch[j])
+        {
+            i++;
+            j++;
+            next[i] = j;
+        }
+        else
+        {
+            j = next[j];
+        }
+    }
+}
+
 int Index_KMP(SString S, SString T, int next[])
 {
     if (S.length < T.length)
