@@ -81,5 +81,6 @@ int main(void)
     for (i = 0; i < T.length; i++)
         T.ch[i + 1] = source[i];
     printf("%d\n", Index(S, T));
+    printf("%d\n", Index_KMP(S, T));
     return 0;
 }
