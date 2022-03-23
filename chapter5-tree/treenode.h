@@ -15,8 +15,8 @@
 #define ELEMTYPE
 typedef int ElemType;
 
-
-typedef struct TreeNode{
+typedef struct TreeNode
+{
     ElemType value;
     bool isEmpty;
 } TreeNode, Tree[MAXSIZE];
