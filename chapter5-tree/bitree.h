@@ -11,12 +11,13 @@ typedef int ElemType;
 typedef struct BiTNode
 {
     ElemType data;
-    struct BiNode *lchild, *rchild;
+    struct BiTNode *lchild, *rchild;
 } BiTNode, *BiTree;
 
 void PreOrder(BiTree T, void (*visit)(ElemType));
 void InOrder(BiTree T, void (*visit)(ElemType));
 void PostOrder(BiTree T, void (*visit)(ElemType));
 int treeDepth(BiTree T);
+void LevelOrder(BiTree T, void (*visit)(ElemType));
 
 #endif
