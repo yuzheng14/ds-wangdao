@@ -51,28 +51,28 @@ bool GetHead(LinkQueue Q, ElemType *e)
     return true;
 }
 
-int main(void)
-{
-    LinkQueue Q;
-    InitQueue(&Q);
-    EnQueue(&Q, 1);
-    EnQueue(&Q, 2);
-    EnQueue(&Q, 3);
-    EnQueue(&Q, 4);
-    EnQueue(&Q, 5);
-    EnQueue(&Q, 6);
-    EnQueue(&Q, 7);
-    EnQueue(&Q, 8);
-    EnQueue(&Q, 9);
-    EnQueue(&Q, 10);
-    printf("%d\n", GetHead(Q, NULL));
-    int e;
-    printf("%d\n", GetHead(Q, &e));
-    while (!QueueEmpty(Q))
-    {
-        DeQueue(&Q, &e);
-        printf("%-3d", e);
-    }
-    putchar('\n');
-    return 0;
-}
+// int main(void)
+// {
+//     LinkQueue Q;
+//     InitQueue(&Q);
+//     EnQueue(&Q, 1);
+//     EnQueue(&Q, 2);
+//     EnQueue(&Q, 3);
+//     EnQueue(&Q, 4);
+//     EnQueue(&Q, 5);
+//     EnQueue(&Q, 6);
+//     EnQueue(&Q, 7);
+//     EnQueue(&Q, 8);
+//     EnQueue(&Q, 9);
+//     EnQueue(&Q, 10);
+//     printf("%d\n", GetHead(Q, NULL));
+//     int e;
+//     printf("%d\n", GetHead(Q, &e));
+//     while (!QueueEmpty(Q))
+//     {
+//         DeQueue(&Q, &e);
+//         printf("%-3d", e);
+//     }
+//     putchar('\n');
+//     return 0;
+// }

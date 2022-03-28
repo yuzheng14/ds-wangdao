@@ -1,4 +1,7 @@
 #include "bitree.h"
+#define ElemType BiTNode*
+#include "../chapter3-stack-queue-array/linkqueue.h"
+#undef ElemType
 
 void PreOrder(BiTree T, void (*visit)(ElemType))
 {
@@ -38,4 +41,11 @@ int treeDepth(BiTree T)
     l = treeDepth(T->lchild) + 1;
     r = treeDepth(T->rchild) + 1;
     return l > r ? l : r;
+}
+
+int main(void)
+{
+    ElemType a=5;
+    printf("%d\n",a);
+    return 0;
 }
