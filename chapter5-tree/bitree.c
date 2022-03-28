@@ -29,3 +29,13 @@ void PostOrder(BiTree T, void (*visit)(ElemType))
         (*visit)(T->data);
     }
 }
+
+int treeDepth(BiTree T)
+{
+    if (!T)
+        return 0;
+    int l, r;
+    l = treeDepth(T->lchild) + 1;
+    r = treeDepth(T->rchild) + 1;
+    return l > r ? l : r;
+}

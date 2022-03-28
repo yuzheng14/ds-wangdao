@@ -17,5 +17,6 @@ typedef struct BiTNode
 void PreOrder(BiTree T, void (*visit)(ElemType));
 void InOrder(BiTree T, void (*visit)(ElemType));
 void PostOrder(BiTree T, void (*visit)(ElemType));
+int treeDepth(BiTree T);
 
 #endif
