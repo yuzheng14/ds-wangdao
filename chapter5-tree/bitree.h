@@ -14,10 +14,10 @@ typedef struct BiTNode
     struct BiTNode *lchild, *rchild;
 } BiTNode, *BiTree;
 
-void PreOrder(BiTree T, void (*visit)(ElemType));
-void InOrder(BiTree T, void (*visit)(ElemType));
-void PostOrder(BiTree T, void (*visit)(ElemType));
+void PreOrder(BiTree T, void (*visit)(BiTNode *));
+void InOrder(BiTree T, void (*visit)(BiTNode *));
+void PostOrder(BiTree T, void (*visit)(BiTNode *));
 int treeDepth(BiTree T);
-void LevelOrder(BiTree T, void (*visit)(ElemType));
+void LevelOrder(BiTree T, void (*visit)(BiTNode *));
 
 #endif

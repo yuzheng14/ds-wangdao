@@ -3,33 +3,33 @@
 #include "../chapter3-stack-queue-array/linkqueue.h"
 #undef ElemType
 
-void PreOrder(BiTree T, void (*visit)(ElemType))
+void PreOrder(BiTree T, void (*visit)(BiTNode *))
 {
     if (T)
     {
-        (*visit)(T->data);
+        visit(T);
         PreOrder(T->lchild, visit);
         PreOrder(T->rchild, visit);
     }
 }
 
-void InOrder(BiTree T, void (*visit)(ElemType))
+void InOrder(BiTree T, void (*visit)(BiTNode *))
 {
     if (T)
     {
         PreOrder(T->lchild, visit);
-        (*visit)(T->data);
+        visit(T);
         PreOrder(T->rchild, visit);
     }
 }
 
-void PostOrder(BiTree T, void (*visit)(ElemType))
+void PostOrder(BiTree T, void (*visit)(BiTNode *))
 {
     if (T)
     {
         PreOrder(T->lchild, visit);
         PreOrder(T->rchild, visit);
-        (*visit)(T->data);
+        visit(T);
     }
 }
 
@@ -43,7 +43,7 @@ int treeDepth(BiTree T)
     return l > r ? l : r;
 }
 
-void LevelOrder(BiTree T, void (*visit)(ElemType))
+void LevelOrder(BiTree T, void (*visit)(BiTNode *))
 {
     LinkQueue Q;
     BiTNode *current;
@@ -52,7 +52,7 @@ void LevelOrder(BiTree T, void (*visit)(ElemType))
     while (!QueueEmpty(Q))
     {
         DeQueue(&Q, &current);
-        visit(current->data);
+        visit(current);
         if (current->lchild)
             EnQueue(&Q, current->lchild);
         if (current->rchild)
