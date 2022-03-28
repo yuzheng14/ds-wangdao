@@ -14,6 +14,8 @@ typedef struct BiTNode
     struct BiNode *lchild, *rchild;
 } BiTNode, *BiTree;
 
-void PreOrder(BiTree T);
+void PreOrder(BiTree T, void (*visit)(ElemType));
+void InOrder(BiTree T, void (*visit)(ElemType));
+void PostOrder(BiTree T, void (*visit)(ElemType));
 
 #endif
