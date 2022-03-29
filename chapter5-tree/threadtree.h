@@ -28,5 +28,6 @@ bool CreateThreadTree(ThreadTree *T);
 void CreateInThread(ThreadTree *T);
 void CreatePreThread(ThreadTree *T);
 void CreatePostThread(ThreadTree *T);
+void InOrderTraverse_Thr(ThreadTree T, void (*visit)(ThreadNode *));
 
 #endif

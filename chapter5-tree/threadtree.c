@@ -131,9 +131,27 @@ void InOrder(ThreadTree T, void (*visit)(ThreadNode *))
         visit(current);
 }
 
-void print(ThreadNode * current)
+void InOrderTraverse_Thr(ThreadTree T, void (*visit)(ThreadNode *))
 {
-    printf("%c",current->data);
+    ThreadNode *current;
+    current = T;
+    while (current)
+    {
+        while (current->ltag == Link)
+            current = current->lchild;
+        visit(current);
+        while (current->rtag == Thread && current->rchild)
+        {
+            current = current->rchild;
+            visit(current);
+        }
+        current = current->rchild;
+    }
+}
+
+void print(ThreadNode *current)
+{
+    printf("%c", current->data);
 }
 
 int main(void)
@@ -141,7 +159,9 @@ int main(void)
     ThreadTree T;
     CreateThreadTree(&T);
     CreateInThread(&T);
-    InOrder(T,print);
+    InOrder(T, print);
+    putchar('\n');
+    InOrderTraverse_Thr(T, print);
     putchar('\n');
     return 0;
 }
