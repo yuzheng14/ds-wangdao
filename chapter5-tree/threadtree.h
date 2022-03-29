@@ -22,9 +22,11 @@ typedef struct ThreadNode
 
 void InOrder(ThreadTree T, void (*visit)(ThreadNode *));
 void PreOrder(ThreadTree T, void (*visit)(ThreadNode *));
+void PostOrder(ThreadTree T, void (*visit)(ThreadNode *));
 bool CreateThreadTree(ThreadTree *T);
 // void InThread(ThreadTree T);
 void CreateInThread(ThreadTree *T);
 void CreatePreThread(ThreadTree *T);
+void CreatePostThread(ThreadTree *T);
 
 #endif

@@ -21,6 +21,16 @@ void PreOrder(ThreadTree T, void (*visit)(ThreadNode *))
     }
 }
 
+void PostOrder(ThreadTree T, void (*visit)(ThreadNode *))
+{
+    if (T)
+    {
+        PostOrder(T->lchild, visit);
+        PostOrder(T->rchild, visit);
+        visit(T);
+    }
+}
+
 bool CreateThreadTree(ThreadTree *T)
 {
     ElemType ch;
@@ -68,6 +78,11 @@ void PreThread(ThreadTree T)
     PreOrder(T, thread);
 }
 
+void PostThread(ThreadTree T)
+{
+    PostOrder(T, thread);
+}
+
 void CreateInThread(ThreadTree *T)
 {
     if (*T)
@@ -85,6 +100,17 @@ void CreatePreThread(ThreadTree *T)
     {
         pre = NULL;
         PreThread(*T);
+        if (!pre->rchild)
+            pre->rtag = Thread;
+    }
+}
+
+void CreatePostThread(ThreadTree *T)
+{
+    if (*T)
+    {
+        pre = NULL;
+        PostThread(*T);
         if (!pre->rchild)
             pre->rtag = Thread;
     }
