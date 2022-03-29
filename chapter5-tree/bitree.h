@@ -21,6 +21,7 @@ void InOrder(BiTree T, void (*visit)(BiTNode *));
 void PostOrder(BiTree T, void (*visit)(BiTNode *));
 int treeDepth(BiTree T);
 void LevelOrder(BiTree T, void (*visit)(BiTNode *));
+// 从前序序列建立二叉树，空结点用 # 表示，如只有一个根节点用 A## 表示
 bool CreateBiTree(BiTree *T);
 
 #endif

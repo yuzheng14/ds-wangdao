@@ -91,7 +91,7 @@ int main(void)
 {
     BiTree T;
     CreateBiTree(&T);
-    PreOrder(T,visit);
+    PreOrder(T, visit);
     putchar('\n');
     return 0;
 }
