@@ -15,7 +15,8 @@ void PreOrder(ThreadTree T, void (*visit)(ThreadNode *))
     if (T)
     {
         visit(T);
-        PreOrder(T->lchild, visit);
+        if (T->ltag == Link)
+            PreOrder(T->lchild, visit);
         PreOrder(T->rchild, visit);
     }
 }
