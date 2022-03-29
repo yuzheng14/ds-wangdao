@@ -1,12 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
 #if !defined BITREE_H
 #define BITREE_H
 
-#if defined ELEMTYPE
-#undef ELEMTYPE
-#endif
-
+#if !defined ELEMTYPE
 #define ELEMTYPE
 typedef int ElemType;
+#endif
 
 typedef struct BiTNode
 {
@@ -19,5 +21,6 @@ void InOrder(BiTree T, void (*visit)(BiTNode *));
 void PostOrder(BiTree T, void (*visit)(BiTNode *));
 int treeDepth(BiTree T);
 void LevelOrder(BiTree T, void (*visit)(BiTNode *));
+bool CreateBiTree(BiTree *T);
 
 #endif

@@ -1,7 +1,11 @@
+#define ELEMTYPE
+#define ElemType char
 #include "bitree.h"
+#undef ElemType
 #define ElemType BiTNode *
 #include "../chapter3-stack-queue-array/linkqueue.h"
 #undef ElemType
+#define ElemType char
 
 void PreOrder(BiTree T, void (*visit)(BiTNode *))
 {
@@ -60,9 +64,34 @@ void LevelOrder(BiTree T, void (*visit)(BiTNode *))
     }
 }
 
+bool CreateBiTree(BiTree *T)
+{
+    ElemType ch;
+    if (scanf("%c", &ch) != EOF)
+    {
+        if (ch == '#')
+            (*T) = NULL;
+        else
+        {
+            (*T) = (BiTNode *)malloc(sizeof(BiTNode));
+            if (!(*T))
+                return false;
+            (*T)->data = ch;
+            return CreateBiTree(&(*T)->lchild) && CreateBiTree(&(*T)->rchild);
+        }
+    }
+    return true;
+}
+void visit(BiTNode *N)
+{
+    printf("%c", N->data);
+}
+
 int main(void)
 {
-    ElemType a = 5;
-    printf("%d\n", a);
+    BiTree T;
+    CreateBiTree(&T);
+    PreOrder(T,visit);
+    putchar('\n');
     return 0;
 }
