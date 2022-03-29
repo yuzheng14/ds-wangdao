@@ -62,3 +62,11 @@ void CreateInThread(ThreadTree *T)
             pre->rtag = Thread;
     }
 }
+
+int main(void)
+{
+    ThreadTree T;
+    CreateThreadTree(&T);
+    CreateInThread(&T);
+    return 0;
+}
