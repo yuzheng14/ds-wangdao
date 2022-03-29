@@ -21,9 +21,9 @@ void InOrder(BiTree T, void (*visit)(BiTNode *))
 {
     if (T)
     {
-        PreOrder(T->lchild, visit);
+        InOrder(T->lchild, visit);
         visit(T);
-        PreOrder(T->rchild, visit);
+        InOrder(T->rchild, visit);
     }
 }
 
@@ -31,8 +31,8 @@ void PostOrder(BiTree T, void (*visit)(BiTNode *))
 {
     if (T)
     {
-        PreOrder(T->lchild, visit);
-        PreOrder(T->rchild, visit);
+        PostOrder(T->lchild, visit);
+        PostOrder(T->rchild, visit);
         visit(T);
     }
 }
