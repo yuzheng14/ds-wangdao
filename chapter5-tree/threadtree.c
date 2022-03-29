@@ -2,33 +2,14 @@
 
 void InOrder(ThreadTree T, void (*visit)(ThreadNode *))
 {
-    if (T)
-    {
-        InOrder(T->lchild, visit);
-        visit(T);
-        InOrder(T->rchild, visit);
-    }
 }
 
 void PreOrder(ThreadTree T, void (*visit)(ThreadNode *))
 {
-    if (T)
-    {
-        visit(T);
-        if (T->ltag == Link)
-            PreOrder(T->lchild, visit);
-        PreOrder(T->rchild, visit);
-    }
 }
 
 void PostOrder(ThreadTree T, void (*visit)(ThreadNode *))
 {
-    if (T)
-    {
-        PostOrder(T->lchild, visit);
-        PostOrder(T->rchild, visit);
-        visit(T);
-    }
 }
 
 bool CreateThreadTree(ThreadTree *T)
@@ -70,17 +51,33 @@ void thread(ThreadNode *current)
 
 void InThread(ThreadTree T)
 {
-    InOrder(T, thread);
+    if (T)
+    {
+        InThread(T->lchild);
+        thread(T);
+        InThread(T->rchild);
+    }
 }
 
 void PreThread(ThreadTree T)
 {
-    PreOrder(T, thread);
+    if (T)
+    {
+        thread(T);
+        if (T->ltag == Link)
+            PreThread(T->lchild);
+        PreThread(T->rchild);
+    }
 }
 
 void PostThread(ThreadTree T)
 {
-    PostOrder(T, thread);
+    if (T)
+    {
+        PostThread(T->lchild);
+        PostThread(T->rchild);
+        thread(T);
+    }
 }
 
 void CreateInThread(ThreadTree *T)
