@@ -8,6 +8,9 @@
 typedef char ElemType;
 #endif
 
+#define Thread true;
+#define Link false;
+
 typedef struct ThreadNode
 {
     ElemType data;
