@@ -1,9 +1,5 @@
 #include "threadtree.h"
 
-void InOrder(ThreadTree T, void (*visit)(ThreadNode *))
-{
-}
-
 void PreOrder(ThreadTree T, void (*visit)(ThreadNode *))
 {
 }
@@ -113,10 +109,39 @@ void CreatePostThread(ThreadTree *T)
     }
 }
 
+ThreadNode *FirstNode(ThreadNode *p)
+{
+    while (p->ltag == Link)
+        p = p->lchild;
+    return p;
+}
+
+ThreadNode *NextNode(ThreadNode *p)
+{
+    if (p->rtag == Link)
+        return FirstNode(p->rchild);
+    else
+        return p->rchild;
+}
+
+void InOrder(ThreadTree T, void (*visit)(ThreadNode *))
+{
+    ThreadNode *current;
+    for (current = FirstNode(T); current; current = NextNode(current))
+        visit(current);
+}
+
+void print(ThreadNode * current)
+{
+    printf("%c",current->data);
+}
+
 int main(void)
 {
     ThreadTree T;
     CreateThreadTree(&T);
     CreateInThread(&T);
+    InOrder(T,print);
+    putchar('\n');
     return 0;
 }
