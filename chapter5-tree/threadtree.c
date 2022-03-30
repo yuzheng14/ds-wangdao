@@ -149,6 +149,28 @@ void InOrderTraverse_Thr(ThreadTree T, void (*visit)(ThreadNode *))
     }
 }
 
+ThreadNode *LastNode(ThreadNode *current)
+{
+    while (current->rtag == Link)
+        current = current->rchild;
+    return current;
+}
+
+ThreadNode *PreNode(ThreadNode *current)
+{
+    if (current->ltag == Link)
+        return LastNode(current->lchild);
+    else
+        return current->lchild;
+}
+
+void RevInOrder(ThreadTree T, void (*visit)(ThreadNode *))
+{
+    ThreadNode *current;
+    for (current = LastNode(T); current; current = PreNode(current))
+        visit(current);
+}
+
 void print(ThreadNode *current)
 {
     printf("%c", current->data);
@@ -162,6 +184,8 @@ int main(void)
     InOrder(T, print);
     putchar('\n');
     InOrderTraverse_Thr(T, print);
+    putchar('\n');
+    RevInOrder(T, print);
     putchar('\n');
     return 0;
 }

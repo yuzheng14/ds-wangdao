@@ -29,5 +29,7 @@ void CreateInThread(ThreadTree *T);
 void CreatePreThread(ThreadTree *T);
 void CreatePostThread(ThreadTree *T);
 void InOrderTraverse_Thr(ThreadTree T, void (*visit)(ThreadNode *));
+// 逆序中序遍历
+void RevInOrder(ThreadTree T, void (*visit)(ThreadNode *));
 
 #endif
