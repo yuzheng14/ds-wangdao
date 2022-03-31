@@ -3,15 +3,8 @@
 
 int main(void)
 {
-    int *n;
-    if (n == NULL)
-    {
-        printf("n is null.\n");
-        printf("n:%p\n", n);
-    }
-    else
-    {
-        puts("n is not null.\n");
-        printf("n:%p\n*n:%d\n", n, *n);
-    }
+    int i;
+    for (i = 1; i < 1; i++)
+        printf("%d\n", i);
+    return 0;
 }
