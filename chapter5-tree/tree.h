@@ -1,9 +1,7 @@
-
-// 双亲表示法
+typedef char ElemType;
 #define MAX_TREE_SIZE 100
 
-typedef char ElemType;
-
+// 双亲表示法
 typedef struct
 {
     ElemType data;
@@ -16,3 +14,24 @@ typedef struct
     // 结点数量
     int n;
 } PTree;
+
+// 孩子表示法
+typedef struct CTNode
+{
+    // 孩子结点位置
+    int child;
+    // 下一个孩子结点位置指针
+    struct CTNode *next;
+} CTNode;
+typedef struct
+{
+    ElemType data;
+    // 第一个孩子结点指针
+    CTNode *firstChild;
+} CTBox;
+typedef struct
+{
+    CTBox nodes[MAX_TREE_SIZE];
+    // 结点数和根的位置；
+    int n, r;
+} CTree;
