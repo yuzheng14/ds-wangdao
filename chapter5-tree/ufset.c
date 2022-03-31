@@ -7,8 +7,15 @@ void Initial(int S[], int length)
 
 int Find(int S[], int x)
 {
-    while (S[x] > -1)
-        x = S[x];
+    int root = x;
+    while (S[root] > -1)
+        root = S[root];
+    while (x != root)
+    {
+        int t = S[x];
+        S[x] = root;
+        x = t;
+    }
     return x;
 }
 
