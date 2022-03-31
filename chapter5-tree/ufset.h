@@ -9,6 +9,7 @@
 typedef int UFSets[SIZE];
 
 void Initial(int S[], int length);
-int Find(int S[],int x);
+int Find(int S[], int x);
+void Union(int S[], int root1, int root2);
 
 #endif
