@@ -51,4 +51,4 @@ void PostOrder(CSTree T, void (*visit)(CSNode *));
 void LevelOrder(CSTree T, void (*visit)(CSNode *));
 
 void PreOrderForest(CSTree T, void (*visit)(CSNode *));
-void PostOrderForest(CSTree T,void (*visit)(CSNode *));
+void PostOrderForest(CSTree T, void (*visit)(CSNode *));
