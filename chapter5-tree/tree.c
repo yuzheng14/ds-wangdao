@@ -28,16 +28,19 @@ void PostOrder(CSTree T, void (*visit)(CSNode *))
 
 void LevelOrder(CSTree T, void (*visit)(CSNode *))
 {
-    LinkQueue Q;
-    InitQueue(&Q);
-    EnQueue(&Q, T);
-    CSNode *current;
-    while (!QueueEmpty(Q))
+    if (T)
     {
-        DeQueue(&Q, &current);
-        visit(current);
-        for (current = current->firstchild; current; current = current->nextsibling)
-            EnQueue(&Q, current);
+        LinkQueue Q;
+        InitQueue(&Q);
+        EnQueue(&Q, T);
+        CSNode *current;
+        while (!QueueEmpty(Q))
+        {
+            DeQueue(&Q, &current);
+            visit(current);
+            for (current = current->firstchild; current; current = current->nextsibling)
+                EnQueue(&Q, current);
+        }
     }
 }
 
