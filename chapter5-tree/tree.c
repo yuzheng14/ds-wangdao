@@ -22,9 +22,9 @@ void PostOrder(CSTree T, void (*visit)(CSNode *))
         if (T->firstchild)
         {
             CSNode *current = T->firstchild;
-            PreOrder(current, visit);
+            PostOrder(current, visit);
             for (current = current->nextsibling; current; current = current->nextsibling)
-                PreOrder(current, visit);
+                PostOrder(current, visit);
         }
         visit(T);
     }
