@@ -50,3 +50,10 @@ void PreOrderForest(CSTree T, void (*visit)(CSNode *))
     for (current = T; current; current = current->nextsibling)
         PreOrder(current, visit);
 }
+
+void PostOrderForest(CSTree T, void (*visit)(CSNode *))
+{
+    CSNode *current;
+    for (current = T; current; current = current->nextsibling)
+        PostOrder(current, visit);
+}
