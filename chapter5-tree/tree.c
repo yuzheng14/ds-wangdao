@@ -8,9 +8,9 @@ void PreOrder(CSTree T, void (*visit)(CSNode *))
         if (T->firstchild)
         {
             CSNode *current = T->firstchild;
-            visit(current);
+            PreOrder(current, visit);
             for (current = current->nextsibling; current; current = current->nextsibling)
-                visit(current);
+                PreOrder(current, visit);
         }
     }
 }
