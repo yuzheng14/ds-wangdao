@@ -9,5 +9,6 @@
 typedef int UFSets[SIZE];
 
 void Initial(int S[], int length);
+int Find(int S[],int x);
 
 #endif
