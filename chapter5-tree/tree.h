@@ -35,3 +35,10 @@ typedef struct
     // 结点数和根的位置；
     int n, r;
 } CTree;
+
+// 孩子兄弟表示法
+typedef struct CSNode
+{
+    ElemType data;
+    struct CSNode *firstchild, *nextsibling;
+} CSNode, *CSTree;
