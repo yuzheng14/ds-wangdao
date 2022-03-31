@@ -14,7 +14,7 @@ void PreOrder(CSTree T, void (*visit)(CSNode *))
             PreOrder(current, visit);
     }
 }
-// 树的后序遍历和二叉树的中序遍历一样
+
 void PostOrder(CSTree T, void (*visit)(CSNode *))
 {
     if (T)

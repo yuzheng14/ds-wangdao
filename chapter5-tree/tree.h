@@ -44,8 +44,10 @@ typedef struct CSNode
 } CSNode, *CSTree;
 
 // 以下算法均使用孩子兄弟表示法表示的森林
-void PreOrder(CSTree,void (*visit)(CSNode *));
-void PostOrder(CSTree,void (*visit)(CSNode *));
-void LevelOrder(CSTree,void (*visit)(CSNode *));
+// 树和森林的前序（先跟）遍历和二叉树的前序遍历一样
+// 树和森林的后续（后根）遍历和二叉树的中序遍历一样
+void PreOrder(CSTree T, void (*visit)(CSNode *));
+void PostOrder(CSTree T, void (*visit)(CSNode *));
+void LevelOrder(CSTree T, void (*visit)(CSNode *));
 
-void PreOrderForest(CSTree T,void (*visit)(CSNode *));
+void PreOrderForest(CSTree T, void (*visit)(CSNode *));
