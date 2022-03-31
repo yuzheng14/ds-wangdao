@@ -8,4 +8,6 @@
 
 typedef int UFSets[SIZE];
 
+void Initial(int S[], int length);
+
 #endif
