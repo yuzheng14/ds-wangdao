@@ -47,3 +47,5 @@ typedef struct CSNode
 void PreOrder(CSTree,void (*visit)(CSNode *));
 void PostOrder(CSTree,void (*visit)(CSNode *));
 void LevelOrder(CSTree,void (*visit)(CSNode *));
+
+void PreOrderForest(CSTree T,void (*visit)(CSNode *));

@@ -40,3 +40,10 @@ void LevelOrder(CSTree T, void (*visit)(CSNode *))
             EnQueue(&Q, current);
     }
 }
+
+void PreOrderForest(CSTree T, void (*visit)(CSNode *))
+{
+    CSNode *current;
+    for (current = T; current; current = current->nextsibling)
+        PreOrder(current, visit);
+}
