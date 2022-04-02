@@ -10,7 +10,7 @@ typedef int EdgeType;
 
 typedef struct
 {
-    char Vex[MaxVertexNum];
+    VertexType Vex[MaxVertexNum];
     EdgeType Edge[MaxVertexNum][MaxVertexNum];
     int vexnum, arcnum;
 } MGraph;
