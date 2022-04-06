@@ -23,6 +23,9 @@ typedef struct
 {
     AdjList vertices;
     int vexnum, arcnum;
-} ALGraph;
+} ALGraph, Graph;
+
+int FirstNeighbor(ALGraph G, int x);
+int NextNeighbor(ALGraph G, int x, int y);
 
 #endif

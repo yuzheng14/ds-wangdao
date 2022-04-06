@@ -13,6 +13,9 @@ typedef struct
     VertexType Vex[MaxVertexNum];
     EdgeType Edge[MaxVertexNum][MaxVertexNum];
     int vexnum, arcnum;
-} MGraph;
+} MGraph, Graph;
+
+int FirstNeighbor(MGraph G, int x);
+int NextNeighbor(MGraph G, int x, int y);
 
 #endif
