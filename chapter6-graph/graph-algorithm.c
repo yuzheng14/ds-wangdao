@@ -28,3 +28,22 @@ void BFS(Graph G, int v, void (*visit)(int))
             }
     }
 }
+
+void DFSTraverse(Graph G, void (*visit)(int))
+{
+    int i;
+    for (i = 0; i < G.vexnum; i++)
+        visited[i] = false;
+    for (i = 0; i < G.vexnum; i++)
+        if (!visited[i])
+            DFS(G, i, visit);
+}
+void DFS(Graph G, int v, void (*visit)(int))
+{
+    visit(v);
+    visited[v] = true;
+    int w;
+    for (w = FirstNeighbor(G, v); w >= 0; w = NextNeighbor(G, v, w))
+        if (!visited[w])
+            DFS(G, w, visit);
+}

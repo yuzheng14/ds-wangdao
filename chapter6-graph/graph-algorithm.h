@@ -12,5 +12,7 @@ LinkQueue Q;
 
 void BFSTraverse(Graph G, void (*visit)(int));
 void BFS(Graph G, int v, void (*visit)(int));
+void DFSTraverse(Graph G, void (*visit)(int));
+void DFS(Graph G, int v, void (*visit)(int));
 
 #endif
