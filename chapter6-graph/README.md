@@ -8,7 +8,7 @@
 
 - Kruskal 算法求最小生成树
 
-  ![Kruskal 算法图](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pkAoURcXxsRJxMT_Iv_DNlfonzSNUDSzw5ptPiUl5lfqlPxSzcxhX-UuMQw2ozJkX8dsJdkxgj-OgpyZCITL0LlLanzeN-sSyczC95DJaKW22p3IDPpFMFzdHy6J7Ag2ofnCwD1LACbBp53Joye4geC3gwTwfJrkNFfyo_rd7X6SB9bg3PL9pYbCLD2fJYpKXtBoKp3Gk80cs5-Zu_08k1o0Nw1C0)
+  ![Kruskal 算法图](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuG8pkAoURcXxsRJxMT_Iv_DNlfonzSNUDSzw5ptPiUl5lfqlPxSzcxhX-UuMQw2ozJkX8dsJdkxgj-OgpyZCITL0LlLanzeN-sSyczC95DJaKW22p3IDPpFMFzdHy6J7Ag2ofnCwD1LACbBp53Joye4geC3gwTwfJrkNFfyo_rd7X6SB9beZP80wdkxS1aJFvYy56W2HISqfJbNGg4mjreHmyr8oqxY09DX5G6_b5t0v0Bb0Fm80)
 
 ## 邻接表
 
