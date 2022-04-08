@@ -1,4 +1,5 @@
 #include "matrixgraph.h"
+#include "edge.h"
 
 int InsertVertex(MGraph *G, VertexType v)
 {
@@ -74,6 +75,91 @@ void MiniSpanTree_Prim(MGraph G)
     }
 }
 
+// 交换元素
+void swap(Edge E, int a, int b)
+{
+    ENode temp;
+    temp = E[a];
+    E[a] = E[b];
+    E[b] = temp;
+}
+
+// 快排
+void quick_sort(Edge E, int left, int right)
+{
+    int i = left, j = right;
+    while (i < j)
+    {
+        ENode temp = E[left];
+        while (E[j].weight > temp.weight && i < j)
+            j--;
+        while (E[i].weight <= temp.weight && i < j)
+            i++;
+        swap(E, i, j);
+    }
+
+    if (left < right)
+    {
+        swap(E, left, i);
+        quick_sort(E, left, i - 1);
+        quick_sort(E, i + 1, right);
+    }
+}
+
+// 并查集查操作
+int find(int *parent, int v)
+{
+    while (parent[v] > -1)
+        v = parent[v];
+    return v;
+}
+
+// 邻接矩阵转换为边集数组
+void MGraph2Edge(MGraph G, Edge E)
+{
+    int i, j;
+    int k = 0;
+
+    for (i = 0; i < G.vexnum - 1; i++)
+        for (j = i + 1; j < G.vexnum; j++)
+
+            if (G.Edge[i][j] != INF)
+            {
+                E[k].begin = i;
+                E[k].end = j;
+                E[k++].weight = G.Edge[i][j];
+            }
+}
+
+// Kruscal 算法
+void MiniSpanTree_Kruskal(MGraph G)
+{
+    Edge E;
+    // 将邻接矩阵转换成边集数组
+    MGraph2Edge(G, E);
+    // 并查集，用于判断两个结点之间是否已经连通
+    int parent[G.vexnum];
+    int i, n, m;
+    // 初始化并查集
+    for (i = 0; i < G.vexnum; i++)
+        parent[i] = -1;
+    // 对边集数组进行排序
+    quick_sort(E, 0, G.arcnum - 1);
+    // 对边集数组中的每一条边判断
+    // 从最小的边开始
+    // 如果两个点没有连通则将该条边加入生成树
+    for (i = 0; i < G.arcnum; i++)
+    {
+        n = find(parent, E[i].begin);
+        m = find(parent, E[i].end);
+        if (n != m)
+        {
+            printf("(%d, %d) %d\n", E[i].begin, E[i].end, E[i].weight);
+            parent[n] = m;
+        }
+    }
+}
+
 int main(void)
 {
     MGraph G;
@@ -96,4 +182,6 @@ int main(void)
     for (i = 0; i < sizeof(edges) / (sizeof(int) * 3); i++)
         AddEdge(&G, edges[i][0], edges[i][1], edges[i][2]);
     MiniSpanTree_Prim(G);
+    MiniSpanTree_Kruskal(G);
+    return 0;
 }

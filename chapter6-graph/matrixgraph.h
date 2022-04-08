@@ -24,5 +24,6 @@ void MiniSpanTree_Prim(MGraph G);
 bool AddEdge(MGraph *G, int x, int y, int info);
 void InitGraph(MGraph *G);
 int InsertVertex(MGraph *G, VertexType v);
+void MiniSpanTree_Kruskal(MGraph G);
 
 #endif
