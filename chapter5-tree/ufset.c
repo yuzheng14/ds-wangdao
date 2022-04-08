@@ -8,8 +8,10 @@ void Initial(int S[], int length)
 int Find(int S[], int x)
 {
     int root = x;
+    // 找到根
     while (S[root] > -1)
         root = S[root];
+    // 循环将 x 上的双亲连接到根，降低树的高度
     while (x != root)
     {
         int t = S[x];
@@ -21,6 +23,7 @@ int Find(int S[], int x)
 
 void Union(int S[], int root1, int root2)
 {
+    // 根节点存树高度的负数
     if (root1 == root2)
         return;
     if (S[root2] > S[root1])
