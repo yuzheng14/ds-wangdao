@@ -1,5 +1,9 @@
+#include <stdlib.h>
+#include <limits.h>
 #include "adjlistgraph.h"
 #include "../chapter3-stack-queue-array/linkqueue.h"
+
+#define INF INT_MAX
 
 void InitGraph(ALGraph *G)
 {
@@ -103,4 +107,40 @@ void DFSTraverse(ALGraph G, void (*visit)(Vnode))
     for (i = 0; i < G.vexnum; i++)
         if (!visited[i])
             DFS(G, i, visit);
+}
+
+void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
+{
+    int i;
+    if (d)
+        free(d);
+    if (path)
+        free(path);
+    d = (int *)malloc(G.vexnum);
+    path = (int *)malloc(G.vexnum);
+    for (i = 0; i < G.vexnum; i++)
+    {
+        visited[i] = false;
+        d[i] = INF;
+        path[i] = -1;
+    }
+    LinkQueue Q;
+    InitQueue(&Q);
+    visited[v] = true;
+    EnQueue(&Q, v);
+    while (QueueEmpty(Q))
+    {
+        DeQueue(&Q, &v);
+        ArcNode *current;
+        for (current = G.vertices[v].first; current; current = current->next)
+        {
+            if (!visited[current->adjvex])
+            {
+                d[current->adjvex] = d[v] + 1;
+                path[current->adjvex] = v;
+                visited[current->adjvex] = true;
+                EnQueue(&Q, current->adjvex);
+            }
+        }
+    }
 }

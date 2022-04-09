@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include <stdlib.h>
+
 #if !defined ADJLIST_GRAPH_H
 #define ADJLIST_GRAPH_H
 
@@ -40,5 +40,11 @@ int FirstNeighbor(ALGraph G, int x);
 int NextNeighbor(ALGraph G, int x, int y);
 void BFSTraverse(ALGraph G, void (*visit)(Vnode));
 void DFSTraverse(ALGraph G, void (*visit)(Vnode));
+// BFS算法求无权图单源最短路径
+// v 为起始节点
+// d 为顶点 v 到各点的最短路径权值
+// path 为顶点 v 到各点的最短路径
+// d 和 path 可只声明，无需初始化
+void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path);
 
 #endif
