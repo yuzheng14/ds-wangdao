@@ -44,7 +44,7 @@ void DFSTraverse(ALGraph G, void (*visit)(Vnode));
 // v 为起始节点
 // d 为顶点 v 到各点的最短路径权值
 // path 为顶点 v 到各点的最短路径
-// d 和 path 可只声明，无需初始化
+// d 和 path 的长度需不小于顶点数，否则会导致非法访问或者未知行为
 void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path);
 
 #endif

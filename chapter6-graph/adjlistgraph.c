@@ -112,12 +112,6 @@ void DFSTraverse(ALGraph G, void (*visit)(Vnode))
 void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
 {
     int i;
-    if (d)
-        free(d);
-    if (path)
-        free(path);
-    d = (int *)malloc(G.vexnum);
-    path = (int *)malloc(G.vexnum);
     for (i = 0; i < G.vexnum; i++)
     {
         visited[i] = false;
@@ -126,9 +120,10 @@ void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
     }
     LinkQueue Q;
     InitQueue(&Q);
+    d[v] = 0;
     visited[v] = true;
     EnQueue(&Q, v);
-    while (QueueEmpty(Q))
+    while (!QueueEmpty(Q))
     {
         DeQueue(&Q, &v);
         ArcNode *current;
@@ -144,3 +139,47 @@ void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
         }
     }
 }
+
+// void print(Vnode v)
+// {
+//     printf("%-2c", v.data);
+// }
+
+// int main(void)
+// {
+//     ALGraph G;
+//     InitGraph(&G);
+//     char vexs[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8'};
+//     int edges[][2] = {
+//         {1, 5},
+//         {1, 2},
+//         {2, 6},
+//         {6, 3},
+//         {6, 7},
+//         {7, 4},
+//         {4, 8},
+//         {7, 8},
+//         {3, 4},
+//         {3, 7}};
+//     int i;
+//     for (i = 0; i < 8; i++)
+//         InsertVertex(&G, vexs[i]);
+//     for (i = 0; i < 10; i++)
+//     {
+//         AddEdge(&G, edges[i][0], edges[i][1]);
+//         AddEdge(&G, edges[i][1], edges[i][0]);
+//     }
+//     BFSTraverse(G, print);
+//     putchar('\n');
+//     DFSTraverse(G, print);
+//     putchar('\n');
+//     int d[G.vexnum], path[G.vexnum];
+//     BFS_MIN_Distance(G, 2, d, path);
+//     for (i = 0; i < G.vexnum; i++)
+//         printf("%-2d", d[i]);
+//     putchar('\n');
+//     for (i = 0; i < G.vexnum; i++)
+//         printf("%-2d", path[i]);
+//     putchar('\n');
+//     return 0;
+// }
