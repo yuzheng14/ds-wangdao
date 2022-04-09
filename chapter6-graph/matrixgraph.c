@@ -19,6 +19,8 @@ void InitGraph(MGraph *G)
         for (j = 0; j < MaxVertexNum; j++)
             G->Edge[i][j] = INF;
     for (i = 0; i < MaxVertexNum; i++)
+        G->Edge[i][i] = 0;
+    for (i = 0; i < MaxVertexNum; i++)
         G->Vex[i] = 0;
 }
 
@@ -27,7 +29,7 @@ bool AddEdge(MGraph *G, int x, int y, int info)
     if (x < 0 || y < 0 || x > G->vexnum || y > G->vexnum || x == y)
         return false;
     G->Edge[x][y] = info;
-    G->Edge[y][x] = info;
+    // G->Edge[y][x] = info;
     G->arcnum++;
     return true;
 }
@@ -160,28 +162,97 @@ void MiniSpanTree_Kruskal(MGraph G)
     }
 }
 
+void ShortestDistance_Dijkstra(MGraph G, int v, int *distance, int *path)
+{
+    // true 表示当前结点已是最短路径
+    bool final[G.vexnum];
+    int i;
+    for (i = 0; i < G.vexnum; i++)
+    {
+        distance[i] = G.Edge[v][i];
+        path[i] = distance[i] == INF ? -1 : 0;
+        final[i] = false;
+    }
+    // 将 v 结点的路径标记为 -1
+    path[v] = -1;
+    // 将 v 结点标记为已是最短路径
+    final[v] = true;
+    // 循环找到所有最短路径，因为还有 G.vexnum - 1 个结点，所以循环次数为 G.vexnum - 1
+    for (i = 1; i < G.vexnum; i++)
+    {
+        int j;
+        // 循环找到 final 为 false 的结点中 distance 最小的结点
+        // 因为不好确定 v 的位置，所以遍历所有结点
+        int min = INF, k;
+        for (j = 0; j < G.vexnum; j++)
+            if (!final[j] && distance[j] < min)
+            {
+                min = distance[j];
+                k = j;
+            }
+        // k 已为最短路径
+        final[k] = true;
+        // 循环更新路径长度和路径
+        for (j = 0; j < G.vexnum; j++)
+            if (!final[j] && distance[k] + G.Edge[k][j] < distance[j])
+            {
+                distance[j] = distance[k] + G.Edge[k][j];
+                path[j] = k;
+            }
+    }
+}
+
 int main(void)
 {
     MGraph G;
     InitGraph(&G);
-    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+
+    // prim 算法测试
+    // char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+    // int i;
+    // for (i = 0; i < sizeof(vexs) / sizeof(char); i++)
+    //     InsertVertex(&G, vexs[i]);
+    // int edges[][3] = {
+    //     {0, 1, 6},
+    //     {0, 2, 5},
+    //     {0, 3, 1},
+    //     {1, 4, 3},
+    //     {2, 5, 2},
+    //     {3, 1, 5},
+    //     {3, 2, 4},
+    //     {3, 4, 6},
+    //     {3, 5, 4},
+    //     {4, 5, 6}};
+    // for (i = 0; i < sizeof(edges) / (sizeof(int) * 3); i++)
+    //     AddEdge(&G, edges[i][0], edges[i][1], edges[i][2]);
+    // MiniSpanTree_Prim(G);
+    // MiniSpanTree_Kruskal(G);
+
+    // dijkstra 算法测试
+    char vexs[] = {'0', '1', '2', '3', '4'};
+    int edge[][3] = {
+        {0, 1, 10},
+        {1, 2, 1},
+        {1, 4, 2},
+        {4, 1, 3},
+        {2, 3, 4},
+        {3, 2, 6},
+        {3, 0, 7},
+        {4, 2, 9},
+        {0, 4, 5},
+        {4, 3, 2}};
     int i;
-    for (i = 0; i < sizeof(vexs) / sizeof(char); i++)
+    for (i = 0; i < 5; i++)
         InsertVertex(&G, vexs[i]);
-    int edges[][3] = {
-        {0, 1, 6},
-        {0, 2, 5},
-        {0, 3, 1},
-        {1, 4, 3},
-        {2, 5, 2},
-        {3, 1, 5},
-        {3, 2, 4},
-        {3, 4, 6},
-        {3, 5, 4},
-        {4, 5, 6}};
-    for (i = 0; i < sizeof(edges) / (sizeof(int) * 3); i++)
-        AddEdge(&G, edges[i][0], edges[i][1], edges[i][2]);
-    MiniSpanTree_Prim(G);
-    MiniSpanTree_Kruskal(G);
+    for (i = 0; i < 10; i++)
+        AddEdge(&G, edge[i][0], edge[i][1], edge[i][2]);
+    int distance[G.vexnum], path[G.vexnum];
+    ShortestDistance_Dijkstra(G, 0, distance, path);
+    for (i = 0; i < G.vexnum; i++)
+        printf("%-2d", distance[i]);
+    putchar('\n');
+    for (i = 0; i < G.vexnum; i++)
+        printf("%-2d", path[i]);
+    putchar('\n');
     return 0;
 }

@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "../chapter3-stack-queue-array/linkqueue.c",
+                // "../chapter3-stack-queue-array/linkqueue.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

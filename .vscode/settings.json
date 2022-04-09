@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "string.h": "c",
-        "linkqueue.h": "c"
+        "linkqueue.h": "c",
+        "limits.h": "c"
     }
 }
