@@ -112,6 +112,7 @@ void DFSTraverse(ALGraph G, void (*visit)(Vnode))
 void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
 {
     int i;
+    // 初始化数组
     for (i = 0; i < G.vexnum; i++)
     {
         visited[i] = false;
@@ -123,6 +124,7 @@ void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
     d[v] = 0;
     visited[v] = true;
     EnQueue(&Q, v);
+    // BFS 算法
     while (!QueueEmpty(Q))
     {
         DeQueue(&Q, &v);
@@ -131,7 +133,9 @@ void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path)
         {
             if (!visited[current->adjvex])
             {
+                // 将计算该节点的路径长度
                 d[current->adjvex] = d[v] + 1;
+                // 存储该节点的路径
                 path[current->adjvex] = v;
                 visited[current->adjvex] = true;
                 EnQueue(&Q, current->adjvex);
