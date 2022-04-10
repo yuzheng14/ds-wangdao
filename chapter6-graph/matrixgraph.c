@@ -202,6 +202,34 @@ void ShortestDistance_Dijkstra(MGraph G, int v, int *distance, int *path)
     }
 }
 
+void ShortestDistance_Floyd(MGraph G, int (*distance)[MaxVertexNum], int (*path)[MaxVertexNum])
+{
+    int i, j, k;
+    // 初始化
+    for (i = 0; i < G.vexnum; i++)
+        for (j = 0; j < G.vexnum; j++)
+        {
+            // 将举例设为边矩阵的里的举例
+            distance[i][j] = G.Edge[i][j];
+            // 将路径设为 -1
+            path[i][j] = -1;
+        }
+
+    // 当 i 为中转点的时候
+    for (i = 0; i < G.vexnum; i++)
+        // 更新两个结果数组的值
+        for (j = 0; j < G.vexnum; j++)
+            for (k = 0; k < G.vexnum; k++)
+            {
+                // 如果经过该中转点的路径长度小，则更新举例，并将中转点加入路径
+                if (distance[j][k] > distance[j][i] + distance[i][k])
+                {
+                    distance[j][k] = distance[j][i] + distance[i][k];
+                    path[j][k] = i;
+                }
+            }
+}
+
 int main(void)
 {
     MGraph G;
@@ -229,30 +257,64 @@ int main(void)
     // MiniSpanTree_Kruskal(G);
 
     // dijkstra 算法测试
+    // char vexs[] = {'0', '1', '2', '3', '4'};
+    // int edge[][3] = {
+    //     {0, 1, 10},
+    //     {1, 2, 1},
+    //     {1, 4, 2},
+    //     {4, 1, 3},
+    //     {2, 3, 4},
+    //     {3, 2, 6},
+    //     {3, 0, 7},
+    //     {4, 2, 9},
+    //     {0, 4, 5},
+    //     {4, 3, 2}};
+    // int i;
+    // for (i = 0; i < 5; i++)
+    //     InsertVertex(&G, vexs[i]);
+    // for (i = 0; i < 10; i++)
+    //     AddEdge(&G, edge[i][0], edge[i][1], edge[i][2]);
+    // int distance[G.vexnum], path[G.vexnum];
+    // ShortestDistance_Dijkstra(G, 0, distance, path);
+    // for (i = 0; i < G.vexnum; i++)
+    //     printf("%-2d", distance[i]);
+    // putchar('\n');
+    // for (i = 0; i < G.vexnum; i++)
+    //     printf("%-2d", path[i]);
+    // putchar('\n');
+
+    // Floyd 算法测试
     char vexs[] = {'0', '1', '2', '3', '4'};
     int edge[][3] = {
-        {0, 1, 10},
-        {1, 2, 1},
-        {1, 4, 2},
-        {4, 1, 3},
-        {2, 3, 4},
-        {3, 2, 6},
-        {3, 0, 7},
-        {4, 2, 9},
-        {0, 4, 5},
-        {4, 3, 2}};
+        {0, 2, 1},
+        {0, 4, 10},
+        {1, 3, 1},
+        {1, 4, 5},
+        {2, 1, 1},
+        {2, 4, 7},
+        {3, 4, 1}};
     int i;
     for (i = 0; i < 5; i++)
         InsertVertex(&G, vexs[i]);
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 7; i++)
         AddEdge(&G, edge[i][0], edge[i][1], edge[i][2]);
-    int distance[G.vexnum], path[G.vexnum];
-    ShortestDistance_Dijkstra(G, 0, distance, path);
+    int distance[5][MaxVertexNum], path[5][MaxVertexNum];
+    ShortestDistance_Floyd(G, distance, path);
+    int j;
     for (i = 0; i < G.vexnum; i++)
-        printf("%-2d", distance[i]);
+    {
+        for (j = 0; j < G.vexnum; j++)
+            printf("%-3d", distance[i][j]);
+        putchar('\n');
+    }
     putchar('\n');
     for (i = 0; i < G.vexnum; i++)
-        printf("%-2d", path[i]);
+    {
+        for (j = 0; j < G.vexnum; j++)
+            printf("%-3d", path[i][j]);
+        putchar('\n');
+    }
     putchar('\n');
+
     return 0;
 }
