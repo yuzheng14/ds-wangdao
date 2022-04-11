@@ -46,5 +46,10 @@ void DFSTraverse(ALGraph G, void (*visit)(Vnode));
 // path 为顶点 v 到各点的最短路径
 // d 和 path 的长度需不小于顶点数，否则会导致非法访问或者未知行为
 void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path);
+// 拓扑排序
+// print 为拓扑路径
+// 请保证 print 数组长度不小于顶点数，否则会导致非法访问或者未定义行为
+// true 为无环路，false 为有环路
+bool ToplogicalSort(ALGraph G, int *print);
 
 #endif

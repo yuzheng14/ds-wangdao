@@ -52,41 +52,41 @@ bool DestroyStack(LiStack *S)
     return true;
 }
 
-int main(void)
-{
-    LiStack S;
-    InitStack(&S);
-    if (StackEmpty(S))
-        puts("当前栈为空");
-    else
-        puts("当前栈不为空");
-    Push(&S, 1);
-    Push(&S, 2);
-    Push(&S, 3);
-    Push(&S, 4);
-    Push(&S, 5);
-    Push(&S, 6);
-    int e;
-    while (!StackEmpty(S))
-    {
-        Pop(&S, &e);
-        printf("%-3d", e);
-    }
-    putchar('\n');
-    Push(&S, 1);
-    Push(&S, 2);
-    Push(&S, 3);
-    Push(&S, 4);
-    Push(&S, 5);
-    Push(&S, 6);
-    DestroyStack(&S);
-    if(StackEmpty(S))
-        puts("栈已空");
-    else 
-        puts("栈未空");
-    if(S)
-        puts("当前栈指针指向对象");
-    else 
-        puts("当前栈指针指向空");
-    return 0;
-}
+// int main(void)
+// {
+//     LiStack S;
+//     InitStack(&S);
+//     if (StackEmpty(S))
+//         puts("当前栈为空");
+//     else
+//         puts("当前栈不为空");
+//     Push(&S, 1);
+//     Push(&S, 2);
+//     Push(&S, 3);
+//     Push(&S, 4);
+//     Push(&S, 5);
+//     Push(&S, 6);
+//     int e;
+//     while (!StackEmpty(S))
+//     {
+//         Pop(&S, &e);
+//         printf("%-3d", e);
+//     }
+//     putchar('\n');
+//     Push(&S, 1);
+//     Push(&S, 2);
+//     Push(&S, 3);
+//     Push(&S, 4);
+//     Push(&S, 5);
+//     Push(&S, 6);
+//     DestroyStack(&S);
+//     if(StackEmpty(S))
+//         puts("栈已空");
+//     else 
+//         puts("栈未空");
+//     if(S)
+//         puts("当前栈指针指向对象");
+//     else 
+//         puts("当前栈指针指向空");
+//     return 0;
+// }
