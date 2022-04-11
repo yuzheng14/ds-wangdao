@@ -16,6 +16,22 @@
   
 - Floyd 求所有顶点对的最短路径
 
+- 拓扑排序
+
+  ```mermaid
+  flowchart TD
+  	Start--> B("初始化 in 数组，栈 S，")
+  	B-->C(将 in 中为 0 的结点放入栈)
+  	C-->E{"S 中还有结点？"}
+  	E-- no -->Stop
+  	E-- yes --> F(取出 S 中的结点)
+  	F-->H(加入拓扑排序)
+  	H-->G(将该点连接的点的入度-1)
+  	G-->E
+  ```
+
+  
+
 ## 邻接表
 
 实现：[adjlistgraph.c](adjlistgraph.c)
