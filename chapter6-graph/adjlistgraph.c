@@ -158,28 +158,36 @@ void compute_in_array(ALGraph G, int *in)
 
 bool ToplogicalSort(ALGraph G, int *print)
 {
-
     int in[G.vexnum];
+    // 求入度数组
     compute_in_array(G, in);
     int i;
+    // 初始化
     for (i = 0; i < G.vexnum; i++)
         print[i] = -1;
     LiStack S;
     InitStack(&S);
+    // 将入度为 0 的结点压入栈
     for (i = 0; i < G.vexnum; i++)
         if (in[i] == 0)
             Push(&S, i);
     int k;
     i = 0;
+    // 栈中不为空则一直循环
     while (!StackEmpty(S))
     {
+        // 从栈中取出入度为 0 的结点
         Pop(&S, &k);
+        // 将该节点加入拓扑排序
         print[i++] = k;
         ArcNode *current;
+        // 遍历该结点直接到达结点
         for (current = G.vertices[k].first; current; current = current->next)
+            // 入度 -1，如果入度为 0 则压入栈
             if (--in[current->adjvex] == 0)
                 Push(&S, current->adjvex);
     }
+    // 如果拓扑排序中的结点数 == 顶点数，则返回true
     if (i == G.vexnum)
         return true;
     else
