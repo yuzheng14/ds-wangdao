@@ -12,7 +12,7 @@ typedef struct ArcNode
     int adjvex;
     struct ArcNode *next;
     // 边权值
-    // InfoType info;
+    InfoType info;
 } ArcNode;
 
 typedef struct

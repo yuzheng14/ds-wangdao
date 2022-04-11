@@ -152,19 +152,25 @@ void compute_in_array(ALGraph G, int *in)
     int i;
     ArcNode *current;
     for (i = 0; i < G.vexnum; i++)
+        in[i] = 0;
+    for (i = 0; i < G.vexnum; i++)
         for (current = G.vertices[i].first; current; current = current->next)
             in[current->adjvex]++;
 }
 
-bool ToplogicalSort(ALGraph G, int *print)
+bool ToplogicalSort_Complete(ALGraph G, int *print, int *ve)
 {
     int in[G.vexnum];
+    int i;
     // 求入度数组
     compute_in_array(G, in);
-    int i;
     // 初始化
     for (i = 0; i < G.vexnum; i++)
         print[i] = -1;
+    // 如果 ve 存在，则初始化 ve，事件的最早发生时间
+    if (ve)
+        for (i = 0; i < G.vexnum; i++)
+            ve[i] = 0;
     LiStack S;
     InitStack(&S);
     // 将入度为 0 的结点压入栈
@@ -183,15 +189,25 @@ bool ToplogicalSort(ALGraph G, int *print)
         ArcNode *current;
         // 遍历该结点直接到达结点
         for (current = G.vertices[k].first; current; current = current->next)
-            // 入度 -1，如果入度为 0 则压入栈
+        { // 入度 -1，如果入度为 0 则压入栈
             if (--in[current->adjvex] == 0)
                 Push(&S, current->adjvex);
+            // 如果 ve 存在，则计算事件最早发生时间（=max{到达该结点的最早发生时间 + 活动的时间}
+            if (ve)
+                if (ve[k] + current->info > ve[current->adjvex])
+                    ve[current->adjvex] = ve[k] + current->info;
+        }
     }
     // 如果拓扑排序中的结点数 == 顶点数，则返回true
     if (i == G.vexnum)
         return true;
     else
         return false;
+}
+
+bool ToplogicalSort(ALGraph G, int *print)
+{
+    return ToplogicalSort_Complete(G, print, NULL);
 }
 
 // void print(Vnode v)
