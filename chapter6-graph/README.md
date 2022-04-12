@@ -16,6 +16,17 @@
   
 - Floyd 求所有顶点对的最短路径
 
+
+## 邻接表
+
+实现：[adjlistgraph.c](adjlistgraph.c)
+
+- DFS
+
+- BFS
+
+- BFS 求无权图单源最小路径
+
 - 拓扑排序
 
   ```mermaid
@@ -37,15 +48,30 @@
   	I & J-->Stop
   ```
 
+- 关键路径
+
+  ```mermaid
+  flowchart TD
+  	Start-->a("声明 ve, vl 数组")
+  	a-->b("获取拓扑排序顺便获取 ve")
+  	b-->c("根据 ve 初始化 vl")
+  	c-->d{"拓扑排序中有结点？"}
+  	d--yes-->e{"当前结点有后继结点？"}
+  	e--yes-->f("当前结点的最晚发生事件 = min{后继结点 - 权值}")
+  	f-->e
+  	e--no-->d
+  	d--no-->g{"拓扑排序中有结点？"}
+  	g--yes-->h{"当前结点有后继结点？"}
+  	h--yes-->i("计算 e 和 l")
+  	i-->j{"e == l？"}
+  	j--yes-->k{"输出两个结点"}
+  	j--no-->h
+  	k-->h
+  	h--no-->g
+  	g--no-->Sto
+  ```
+
   
-
-## 邻接表
-
-实现：[adjlistgraph.c](adjlistgraph.c)
-
-- DFS
-- BFS
-- BFS 求无权图单源最小路径
 
 ## 边集数组
 
