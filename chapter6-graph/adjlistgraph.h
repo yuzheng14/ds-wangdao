@@ -34,7 +34,7 @@ int InsertVertex(ALGraph *G, char data);
 // 判断顶点集是否满
 bool VextexFull(ALGraph G);
 // 向表中添加一条有向边，由 x 指向 y
-bool AddEdge(ALGraph *G, int x, int y);
+bool AddEdge(ALGraph *G, int x, int y, int info);
 // 下列两个函数无实现，因为个人实现 BFS 和DFS未用到以下两个函数
 int FirstNeighbor(ALGraph G, int x);
 int NextNeighbor(ALGraph G, int x, int y);
@@ -51,5 +51,7 @@ void BFS_MIN_Distance(ALGraph G, int v, int *d, int *path);
 // 请保证 print 数组长度不小于顶点数，否则会导致非法访问或者未定义行为
 // true 为无环路，false 为有环路
 bool ToplogicalSort(ALGraph G, int *print);
+// 关键路径
+void CriticalPath(ALGraph G);
 
 #endif

@@ -28,7 +28,7 @@ int InsertVertex(ALGraph *G, char data)
     return G->vexnum - 1;
 }
 
-bool AddEdge(ALGraph *G, int x, int y)
+bool AddEdge(ALGraph *G, int x, int y, int info)
 {
     // 边界检查
     if (x < 0 || y < 0 || x > G->vexnum - 1 || x > G->vexnum - 1)
@@ -43,6 +43,7 @@ bool AddEdge(ALGraph *G, int x, int y)
     {
         current = (ArcNode *)malloc(sizeof(ArcNode));
         current->adjvex = y;
+        current->info = info;
         current->next = NULL;
         G->vertices[x].first = current;
     }
@@ -52,6 +53,7 @@ bool AddEdge(ALGraph *G, int x, int y)
             ;
         ArcNode *new = (ArcNode *)malloc(sizeof(ArcNode));
         new->adjvex = y;
+        new->info = info;
         new->next = NULL;
         current->next = new;
     }
@@ -210,6 +212,36 @@ bool ToplogicalSort(ALGraph G, int *print)
     return ToplogicalSort_Complete(G, print, NULL);
 }
 
+void CriticalPath(ALGraph G)
+{
+    // 活动的最早/晚发生时间
+    int e, l;
+    // 事件的最早/晚发生事件
+    int ve[G.vexnum], vl[G.vexnum];
+    // 拓扑排序数组
+    int print[G.vexnum];
+    ToplogicalSort_Complete(G, print, ve);
+    // 将 vl 初始化为 INF
+    int i;
+    for (i = 0; i < G.vexnum; i++)
+        vl[i] = ve[print[G.vexnum - 1]];
+    // 循环遍历拓扑排序
+    ArcNode *current;
+    for (i = G.vexnum - 1; i >= 0; i--)
+        for (current = G.vertices[print[i]].first; current; current = current->next)
+            if (vl[current->adjvex] - current->info < vl[print[i]])
+                vl[print[i]] = vl[current->adjvex] - current->info;
+
+    for (i = 0; i < G.vexnum; i++)
+        for (current = G.vertices[i].first; current; current = current->next)
+        {
+            e = ve[i];
+            l = vl[current->adjvex] - current->info;
+            if (e == l)
+                printf("<%d, %d> %d\n", i, current->adjvex, current->info);
+        }
+}
+
 // void print(Vnode v)
 // {
 //     printf("%-2c", v.data);
@@ -253,24 +285,40 @@ int main(void)
     //     putchar('\n');
 
     // 拓扑排序测试
-    char vexs[] = {'0', '1', '2', '3', '4'};
-    int edges[][3] = {
-        {0, 1, 1},
-        {1, 3, 1},
-        {3, 4, 1},
-        {2, 3, 1},
-        {2, 4, 1}};
-    int print[G.vexnum];
-    int i;
-    for (i = 0; i < 5; i++)
-        InsertVertex(&G, vexs[i]);
-    for (i = 0; i < 5; i++)
-        AddEdge(&G, edges[i][0], edges[i][1]);
-    if (ToplogicalSort(G, print))
-        puts("拓扑排序成功！");
+    // char vexs[] = {'0', '1', '2', '3', '4'};
+    // int edges[][3] = {
+    //     {0, 1, 1},
+    //     {1, 3, 1},
+    //     {3, 4, 1},
+    //     {2, 3, 1},
+    //     {2, 4, 1}};
+    // int print[G.vexnum];
+    // int i;
+    // for (i = 0; i < 5; i++)
+    //     InsertVertex(&G, vexs[i]);
+    // for (i = 0; i < 5; i++)
+    //     AddEdge(&G, edges[i][0], edges[i][1]);
+    // if (ToplogicalSort(G, print))
+    //     puts("拓扑排序成功！");
 
-    for (i = 0; i < G.vexnum; i++)
-        printf("%-3d", print[i]);
-    putchar('\n');
+    // for (i = 0; i < G.vexnum; i++)
+    //     printf("%-3d", print[i]);
+    // putchar('\n');
+    char vexs[] = {'1', '2', '3', '4', '5', '6'};
+    int edges[][3] = {
+        {1, 2, 3},
+        {1, 3, 2},
+        {2, 4, 2},
+        {2, 5, 3},
+        {3, 4, 4},
+        {3, 6, 3},
+        {4, 6, 2},
+        {5, 6, 1}};
+    int i;
+    for (i = 0; i < 6; i++)
+        InsertVertex(&G, vexs[i]);
+    for (i = 0; i < 8; i++)
+        AddEdge(&G, edges[i][0] - 1, edges[i][1] - 1, edges[i][2]);
+    CriticalPath(G);
     return 0;
 }
