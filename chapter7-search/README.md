@@ -86,8 +86,8 @@
       
       ```mermaid
       flowchart TD
-      	LR((LR:0))-->L((L:1))
-      	LR-->Rt((Root:0))
+      	LR((LR:0))-->L((L:1或0))
+      	LR-->Rt((Root:0或-1))
       	L-->LL((LL))
       	L-->LRL((LRL))
       	Rt-->LRR((LRR))
@@ -122,12 +122,12 @@
         
         ```mermaid
         flowchart TD
-        	RL((RL:0))-->Rt((Root:0))
-        	RL-->R((R:-1))
+        	RL((RL:0))-->Rt((Root:0或1))
+        	RL-->R((R:-1或0))
         	Rt-->L((L))
         	Rt-->RLL((RLL))
         	R-->RLR((RLR))
-        	R-->RR
+        	R-->RR((RR))
         ```
         
         
