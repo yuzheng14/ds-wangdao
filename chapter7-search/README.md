@@ -62,7 +62,7 @@
 
     ```mermaid
     flowchart TD
-    	Rt((Root:2))-->L((L:1))
+    	Rt((Root:2))-->L((L:1或-1))
     	Rt-->R((R))
     	L-->LL((LL))
     	L-->LR((LR))
@@ -73,23 +73,33 @@
       即在 LL 中插入一个结点，导致此时不平衡，对 Root 进行一次右旋即可
 
       ```mermaid
-      
+      flowchart TD
+      	L((L:0))-->LL((LL))
+      	L-->Rt((Root:0))
+      	Rt-->LR((LR))
+      	Rt-->R((R))
       ```
-
+  
     - LR 型（在左子树的右子树插入导致不平衡）
-
+  
       即在 LR 中插入一个结点，导致此时不平衡，先对 L 进行一次左旋，再对 Root 进行一次右旋即可
       
       ```mermaid
-      
+      flowchart TD
+      	LR((LR:0))-->L((L:1))
+      	LR-->Rt((Root:0))
+      	L-->LL((LL))
+      	L-->LRL((LRL))
+      	Rt-->LRR((LRR))
+      	Rt-->R
       ```
   
   - 右平衡旋转
-
+  
       ```mermaid
       flowchart TD
       	Rt((Root:-2))-->L((L))
-      	Rt-->R((R:1))
+      	Rt-->R((R:1或-1))
       	R-->RL((RL))
       	R-->RR((RR))
       ```
@@ -99,7 +109,11 @@
         即在 RR 中插入一个结点，导致此时不平衡，对 Root 进行一次左旋即可
       
       ```mermaid
-      
+      flowchart TD
+      	R((R:0))-->Rt((Root:0))
+      	R-->RR((RR))
+      	Rt-->L((L))
+      	Rt-->RL((RL))
       ```
       
     - RL 型（在右子树的左子树插入导致不平衡）
@@ -107,6 +121,13 @@
         即在 RL 中插入一个结点，导致此时不平衡，先对 R 进行一次右旋，再对 Root 进行一次左旋即可
         
         ```mermaid
+        flowchart TD
+        	RL((RL:0))-->Rt((Root:0))
+        	RL-->R((R:-1))
+        	Rt-->L((L))
+        	Rt-->RLL((RLL))
+        	R-->RLR((RLR))
+        	R-->RR
         ```
         
         
