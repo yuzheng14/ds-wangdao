@@ -12,7 +12,13 @@ typedef struct AVLNode
 {
     int key;
     int balance;
-    struct AVLNode *lchild,*rchild;
-}AVLNode, *AVLTree;
+    struct AVLNode *lchild, *rchild;
+} AVLNode, *AVLTree;
+
+void R_Rotate(AVLTree *P);
+void L_Rotate(AVLTree *P);
+// 左平衡旋转
+void LeftBalance(AVLTree *T);
+void RightBalance(AVLTree *T);
 
 #endif
