@@ -130,4 +130,41 @@
         	R-->RR((RR))
         ```
         
-        
+    
+  - 平衡插入
+  
+      ```mermaid
+      flowchart TD
+      	Start(Start)-->a{"当前树为空？"}
+      	a--yes-->b["新建结点给树，taller 设为 true"]
+      	a--no-->c{"当前结点数据 == 要插入数据？"}
+      	c--no-->d["taller 设为 false"]
+      	d-->false["返回 false"]
+      	false-->stop(Stop)
+      	c--yes-->e{"要插入数据 < 当前结点数据？"}
+      	e--yes-->f{"递归调用传入左子树，返回值 == true？"}
+      	f--no-->false
+      	f--yes-->h{"taller == true？"}
+      	h--no-->true["返回true"]
+      	true-->stop
+      	h--yes-->j{"当前树的平衡因子"}
+      	j--左高-->i["左平衡旋转，taller 设为 false"]
+      	j--平-->k["平衡因子设为左高（，taller 设为 true）"]
+      	j--右高-->l["平衡因子设为平，taller 设为 false"]
+      	i-->true
+      	k-->true
+      	l-->true
+      	e--no-->m{"递归调用传入右子树，返回值 == true？"}
+      	m--no-->false
+      	m--yes-->o{"taller == ture？"}
+      %% 此处m出bug
+      	o--no-->true
+      	o--yes-->p{"当前树的平衡因子"}
+      	p--左高-->r["平衡因子设为平，taller 设为 false"]
+      	p--平-->s["平衡因子设为右高（，taller 设为 true）"]
+      	p--右高-->t["右平衡旋转，taller 设为 false"]
+      	r & s & t --> true
+      	
+      ```
+  
+      
