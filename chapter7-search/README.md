@@ -137,6 +137,7 @@
       flowchart TD
       	Start(Start)-->a{"当前树为空？"}
       	a--yes-->b["新建结点给树，taller 设为 true"]
+      	b-->
       	a--no-->c{"当前结点数据 == 要插入数据？"}
       	c--no-->d["taller 设为 false"]
       	d-->false["返回 false"]
@@ -166,5 +167,5 @@
       	r & s & t --> true
       	
       ```
-  
+      
       
