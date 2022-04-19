@@ -23,6 +23,8 @@ void LeftBalance(AVLTree *T);
 // 右平衡旋转
 void RightBalance(AVLTree *T);
 // 向平衡二叉树中插入
-bool InsertAVL(AVLTree *T, int key, int *taller);
+bool InsertAVL(AVLTree *T, int key, bool *taller);
+void InitAVL(AVLTree *T);
+void Traverse(AVLTree T, void (*visit)(AVLNode *));
 
 #endif

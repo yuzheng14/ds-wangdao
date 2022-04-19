@@ -1,5 +1,7 @@
 #include "avltree.h"
+#include <stdio.h>
 #include <stdlib.h>
+#define test
 
 void R_Rotate(AVLTree *P)
 {
@@ -90,7 +92,7 @@ void RightBalance(AVLTree *T)
     }
 }
 
-bool InsertAVL(AVLTree *T, int key, int *taller)
+bool InsertAVL(AVLTree *T, int key, bool *taller)
 {
     // 如果当前结点不存在，则创建结点
     if (!*T)
@@ -168,3 +170,46 @@ bool InsertAVL(AVLTree *T, int key, int *taller)
     }
     return true;
 }
+
+void InitAVL(AVLTree *T)
+{
+    (*T) = NULL;
+}
+
+void Traverse(AVLTree T, void (*visit)(AVLNode *))
+{
+    if (T)
+    {
+        Traverse(T->lchild, visit);
+        visit(T);
+        Traverse(T->rchild, visit);
+    }
+}
+void print(AVLNode *node)
+{
+    printf("%-3d", node->key);
+}
+
+#if defined test
+
+int main(void)
+{
+    AVLTree T;
+    InitAVL(&T);
+    bool taller;
+    InsertAVL(&T, 5, &taller);
+    InsertAVL(&T, 2, &taller);
+    InsertAVL(&T, 1, &taller);
+    InsertAVL(&T, 3, &taller);
+    InsertAVL(&T, 4, &taller);
+    InsertAVL(&T, 5, &taller);
+    InsertAVL(&T, 8, &taller);
+    InsertAVL(&T, 7, &taller);
+    InsertAVL(&T, 6, &taller);
+    InsertAVL(&T, 9, &taller);
+    Traverse(T, print);
+    putchar('\n');
+    return 0;
+}
+
+#endif
