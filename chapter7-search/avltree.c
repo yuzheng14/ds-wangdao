@@ -1,4 +1,5 @@
 #include "avltree.h"
+#include <stdlib.h>
 
 void R_Rotate(AVLTree *P)
 {
@@ -87,4 +88,83 @@ void RightBalance(AVLTree *T)
         L_Rotate(T);
         RL->balance = EH;
     }
+}
+
+bool InsertAVL(AVLTree *T, int key, int *taller)
+{
+    // 如果当前结点不存在，则创建结点
+    if (!*T)
+    {
+        (*T) = (AVLNode *)malloc(sizeof(AVLNode));
+        (*T)->key = key;
+        (*T)->lchild = (*T)->rchild = NULL;
+        (*T)->balance = EH;
+        *taller = true;
+    }
+    else
+    {
+        // 如果存在同值结点，返回 false
+        if (key == (*T)->key)
+        {
+            *taller = false;
+            return false;
+        }
+        // 如果比当前结点的值小，则在左子树插入
+        if (key < (*T)->key)
+        {
+            // 如果插入错误直接返回 false
+            if (!InsertAVL(&(*T)->lchild, key, taller))
+                return false;
+            // 如果左子树变高，根据当前结点的平衡因子做出决定
+            if (*taller)
+            {
+                switch ((*T)->balance)
+                {
+                    // 如果左子树的高度高，则插入后不平衡，所以需要一次左平衡旋转
+                    // 平衡旋转后高度和未插入前相同，所以 taller 设为 false
+                case LH:
+                    LeftBalance(T);
+                    *taller = false;
+                    break;
+                    // 如果左子树高度和右子树一样高，则插入后左子树高
+                    // 左子树变高，所以 taller 设为 true
+                case EH:
+                    (*T)->balance = LH;
+                    *taller = true;
+                    break;
+                    // 如果右子树高，则插入后变为一样高
+                    // 此时右子树高度和左子树相同，原高度不变，所以 taller 设为 false
+                case RH:
+                    (*T)->balance = EH;
+                    *taller = false;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            // 参考左子树的情况
+            if (!InsertAVL(&(*T)->rchild, key, taller))
+                return false;
+            if (*taller)
+            {
+                switch ((*T)->balance)
+                {
+                case LH:
+                    (*T)->balance = EH;
+                    *taller = false;
+                    break;
+                case EH:
+                    (*T)->balance = RH;
+                    *taller = true;
+                    break;
+                case RH:
+                    RightBalance(T);
+                    *taller = false;
+                    break;
+                }
+            }
+        }
+    }
+    return true;
 }

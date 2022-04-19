@@ -1,3 +1,4 @@
+#include<stdbool.h>
 #if !defined AVL_TREE_H
 #define AVL_TREE_H
 
@@ -19,6 +20,9 @@ void R_Rotate(AVLTree *P);
 void L_Rotate(AVLTree *P);
 // 左平衡旋转
 void LeftBalance(AVLTree *T);
+// 右平衡旋转
 void RightBalance(AVLTree *T);
+// 向平衡二叉树中插入
+bool InsertAVL(AVLTree *T, int key, int *taller);
 
 #endif
