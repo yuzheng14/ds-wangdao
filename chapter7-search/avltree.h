@@ -26,5 +26,7 @@ void RightBalance(AVLTree *T);
 bool InsertAVL(AVLTree *T, int key, bool *taller);
 void InitAVL(AVLTree *T);
 void Traverse(AVLTree T, void (*visit)(AVLNode *));
+// 删除平衡二叉树中的结点
+bool RemoveAVL(AVLTree *T, int key, bool *shorter);
 
 #endif

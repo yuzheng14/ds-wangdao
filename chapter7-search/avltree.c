@@ -54,11 +54,18 @@ void LeftBalance(AVLTree *T)
             L->balance = LH;
             (*T)->balance = EH;
             break;
+        // TODO 处理 EH 的情况
         }
         // 先对左子树左旋，右旋
-        L_Rotate(&L);
+        L_Rotate(&(*T)->lchild);
         R_Rotate(T);
         LR->balance = EH;
+        break;
+    case EH:
+        (*T)->balance = LH;
+        L->balance = RH;
+        R_Rotate(T);
+        break;
     }
 }
 
@@ -85,10 +92,18 @@ void RightBalance(AVLTree *T)
             (*T)->balance = LH;
             R->balance = EH;
             break;
+        // TODO 处理 EH 的情况
         }
-        R_Rotate(&R);
+        R_Rotate(&(*T)->rchild);
         L_Rotate(T);
         RL->balance = EH;
+        break;
+    // 此种情况为删除结点时特有，插入不会出现此种情况
+    case EH:
+        (*T)->balance = RH;
+        R->balance = LH;
+        L_Rotate(T);
+        break;
     }
 }
 
@@ -185,9 +200,106 @@ void Traverse(AVLTree T, void (*visit)(AVLNode *))
         Traverse(T->rchild, visit);
     }
 }
+
 void print(AVLNode *node)
 {
     printf("%-3d", node->key);
+}
+
+// 删除的是左子树的节点
+void left_remove_balance(AVLTree *T, bool *shorter)
+{
+
+    switch ((*T)->balance)
+    {
+    case LH:
+        (*T)->balance = EH;
+        *shorter = true;
+        break;
+    case EH:
+        (*T)->balance = RH;
+        *shorter = false;
+        break;
+    case RH:
+        RightBalance(T);
+        *shorter = false;
+        break;
+    } // switch ((*T)->balance)
+}
+
+// 删除的是右子树的结点
+void right_remove_balance(AVLTree *T, bool *shorter)
+{
+    switch ((*T)->balance)
+    {
+    case LH:
+        LeftBalance(T);
+        *shorter = false;
+        break;
+    case EH:
+        (*T)->balance = LH;
+        *shorter = false;
+        break;
+    case RH:
+        (*T)->balance = EH;
+        *shorter = true;
+        break;
+    } // switch((*T)->balance)
+}
+
+void remove_next_node(AVLTree *T, bool *shorter, AVLNode *remove_node)
+{
+    if ((*T)->lchild)
+    {
+        remove_next_node(&(*T)->lchild, shorter, remove_node);
+        if (*shorter)
+            left_remove_balance(T, shorter);
+    }
+    AVLNode *previous = (*T);
+    remove_node->key = previous->key;
+    (*T) = previous->rchild;
+    *shorter = true;
+    free(previous);
+}
+
+bool RemoveAVL(AVLTree *T, int key, bool *shorter)
+{
+    if (!(*T))
+        return false;
+    if ((*T)->key == key)
+    {
+        if (!(*T)->lchild)
+        {
+            *shorter = true;
+            (*T) = (*T)->rchild;
+        }
+        else if (!(*T)->rchild)
+        {
+            (*T) = (*T)->lchild;
+            *shorter = true;
+        }
+
+        else
+        {
+            *shorter = false;
+            remove_next_node(&(*T)->rchild, shorter, (*T));
+        }
+    } // if ((*T)->key == key)
+    else if ((*T)->key < key)
+    {
+        if (!RemoveAVL(&(*T)->rchild, key, shorter))
+            return false;
+        if (*shorter)
+            left_remove_balance(T, shorter);
+    } // if ((*T)->key < key)
+    else
+    {
+        if (!RemoveAVL(&(*T)->lchild, key, shorter))
+            return false;
+        if (*shorter)
+            right_remove_balance(T, shorter);
+    } // else
+    return true;
 }
 
 #if defined test
@@ -207,6 +319,15 @@ int main(void)
     InsertAVL(&T, 7, &taller);
     InsertAVL(&T, 6, &taller);
     InsertAVL(&T, 9, &taller);
+    Traverse(T, print);
+    putchar('\n');
+    RemoveAVL(&T, 5, &taller);
+    Traverse(T, print);
+    putchar('\n');
+    RemoveAVL(&T, 7, &taller);
+    Traverse(T, print);
+    putchar('\n');
+    RemoveAVL(&T, 3, &taller);
     Traverse(T, print);
     putchar('\n');
     return 0;
