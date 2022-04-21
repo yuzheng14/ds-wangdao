@@ -50,11 +50,13 @@ void LeftBalance(AVLTree *T)
             L->balance = EH;
             (*T)->balance = RH;
             break;
+        case EH:
+            (*T)->balance = L->balance = EH;
+            break;
         case RH:
             L->balance = LH;
             (*T)->balance = EH;
             break;
-        // TODO 处理 EH 的情况
         }
         // 先对左子树左旋，右旋
         L_Rotate(&(*T)->lchild);
@@ -88,11 +90,13 @@ void RightBalance(AVLTree *T)
             (*T)->balance = EH;
             R->balance = RH;
             break;
+        case EH:
+            (*T)->balance = R->balance = EH;
+            break;
         case RH:
             (*T)->balance = LH;
             R->balance = EH;
             break;
-        // TODO 处理 EH 的情况
         }
         R_Rotate(&(*T)->rchild);
         L_Rotate(T);
@@ -247,44 +251,56 @@ void right_remove_balance(AVLTree *T, bool *shorter)
     } // switch((*T)->balance)
 }
 
+// 递归找到要删除结点的后继结点，用后继结点替代要删除的结点，并自底向上调整平衡
 void remove_next_node(AVLTree *T, bool *shorter, AVLNode *remove_node)
 {
+    // 如果有左孩子，则递归调用传入左孩子。并调整平衡
     if ((*T)->lchild)
     {
         remove_next_node(&(*T)->lchild, shorter, remove_node);
         if (*shorter)
             left_remove_balance(T, shorter);
+    } // if ((*T)->lchild)
+    // 没有左孩子，即当前结点是后继节点，替换要删除的结点
+    else
+    {
+        AVLNode *previous = (*T);
+        remove_node->key = previous->key;
+        (*T) = previous->rchild;
+        *shorter = true;
+        free(previous);
     }
-    AVLNode *previous = (*T);
-    remove_node->key = previous->key;
-    (*T) = previous->rchild;
-    *shorter = true;
-    free(previous);
 }
 
+// 递归找到要删除的结点，并自底向上调整平衡
 bool RemoveAVL(AVLTree *T, int key, bool *shorter)
 {
+    // 如果当前结点不存在，即树中无要删除结点，返回 false
     if (!(*T))
         return false;
+    // 找到要删除结点，则进行删除操作
     if ((*T)->key == key)
     {
+        // 如果该结点没有左孩子，直接用右孩子替代该节点
         if (!(*T)->lchild)
         {
             *shorter = true;
             (*T) = (*T)->rchild;
-        }
+        } // if (!(*T)->lchild)
+        // 如果该节点没有右孩子，直接用左孩子替代该节点
         else if (!(*T)->rchild)
         {
             (*T) = (*T)->lchild;
             *shorter = true;
-        }
-
+        } // if (!(*T)->rchild)
+        // 否则，调用 remove_next_node() 来删除当前节点
         else
         {
             *shorter = false;
             remove_next_node(&(*T)->rchild, shorter, (*T));
         }
     } // if ((*T)->key == key)
+    // 如果 当前结点的 key 小于 key，则递归调用传入右子树，并处理平衡
     else if ((*T)->key < key)
     {
         if (!RemoveAVL(&(*T)->rchild, key, shorter))
@@ -292,6 +308,7 @@ bool RemoveAVL(AVLTree *T, int key, bool *shorter)
         if (*shorter)
             left_remove_balance(T, shorter);
     } // if ((*T)->key < key)
+    // 如果 当前结点的 key 大于 key，则递归调用传入左子树，并处理平衡
     else
     {
         if (!RemoveAVL(&(*T)->lchild, key, shorter))
@@ -319,6 +336,13 @@ int main(void)
     InsertAVL(&T, 7, &taller);
     InsertAVL(&T, 6, &taller);
     InsertAVL(&T, 9, &taller);
+    InsertAVL(&T, 18, &taller);
+    InsertAVL(&T, 10, &taller);
+    InsertAVL(&T, 15, &taller);
+    InsertAVL(&T, 17, &taller);
+    InsertAVL(&T, 13, &taller);
+    InsertAVL(&T, 20, &taller);
+    InsertAVL(&T, 19, &taller);
     Traverse(T, print);
     putchar('\n');
     RemoveAVL(&T, 5, &taller);
