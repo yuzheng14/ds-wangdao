@@ -44,12 +44,13 @@ void LeftBalance(AVLTree *T)
         // 根据左子树的右子树的平衡因子判断
         switch (LR->balance)
         {
-            // 根据插入到左子树的右子树的（左子树还是右子树）进行判断
-            // 具体值请画图自行理解
+        // 根据插入到左子树的右子树的（左子树还是右子树）进行判断
+        // 具体值请画图或参考 README 中的图解自行理解
         case LH:
             L->balance = EH;
             (*T)->balance = RH;
             break;
+        // 此种情况为插入的结点是左子树的右孩子的情况
         case EH:
             (*T)->balance = L->balance = EH;
             break;
