@@ -5,6 +5,7 @@
 void InitRBT(RBTree *T) { (*T) = NULL; }
 
 void R_Rotate(RBNode *p, RBTree *T) {
+    // 思路同 avl 的右旋
     RBTree L;
     L = p->lchild;
     L->parent = p->parent;
@@ -14,9 +15,9 @@ void R_Rotate(RBNode *p, RBTree *T) {
             p->parent->lchild = L;
         else
             p->parent->rchild = L;
-    } else {
+    } else
+        // 如果 p 的父节点为空，则需对红黑树的根结点进行调整
         (*T) = L;
-    }
     p->parent = L;
     L->rchild = p;
     if (p->lchild) p->lchild->parent = p;
