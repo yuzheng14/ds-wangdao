@@ -1,6 +1,7 @@
 #include "sort.h"
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 void swap(SortType *a, SortType *b) {
     SortType temp = *a;
@@ -71,4 +72,29 @@ void BubbleSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
             }
         }
     }
+}
+
+int Partition(SortType A[], int low, int high,
+              int (*compare)(SortType a, SortType b)) {
+    SortType pivotkey = A[low];
+    while (low < high) {
+        while (low < high && compare(pivotkey, A[high]) != BIG) high--;
+        swap(&A[low], &A[high]);
+        while (low < high && compare(pivotkey, A[low]) != SMALL) low++;
+        swap(&A[low], &A[high]);
+    }
+    return low;
+}
+
+void QSort(SortType A[], int low, int high,
+           int (*compare)(SortType a, SortType b)) {
+    if (low < high) {
+        int pivot = Partition(A, low, high, compare);
+        QSort(A, low, pivot - 1, compare);
+        QSort(A, pivot + 1, high, compare);
+    }
+}
+
+void QuickSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    QSort(A, 0, n, compare);
 }
