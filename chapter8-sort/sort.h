@@ -9,5 +9,7 @@ typedef int SortType;
 
 // 直接插入排序
 void InsertSort(SortType A[],int n,int (*compare)(SortType a,SortType b));
+// 折半插入排序（直接插入排序的优化）
+void BinaryInsertSort(SortType A[],int n,int (*compare)(SortType a,SortType b));
 
 #endif

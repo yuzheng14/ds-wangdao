@@ -21,3 +21,21 @@ void InsertSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
         }
     }
 }
+
+void BinaryInsertSort(SortType A[], int n,
+                      int (*compare)(SortType a, SortType b)) {
+    int i, j, low, high, mid;
+    SortType temp;
+    for (i = 1; i < n; i++) {
+        temp = A[i];
+        while (low <= high) {
+            mid = high / 2 + low / 2;
+            if (compare(A[mid], temp) == BIG)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        for (j = i - 1; j >= low; --j) A[j + 1] = A[j];
+        A[low] = temp;
+    }
+}
