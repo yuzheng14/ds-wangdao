@@ -18,5 +18,7 @@ void ShellSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 void BubbleSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 // 快速排序
 void QuickSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
+// 选择排序
+void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 
 #endif

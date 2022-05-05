@@ -100,6 +100,16 @@ void QuickSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
     QSort(A, 0, n - 1, compare);
 }
 
+void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    int i, j, min;
+    for (i = 0; i < n - 1; i++) {
+        min = i;
+        for (j = i + 1; j < n; j++)
+            if (compare(A[j], A[min]) == SMALL) min = j;
+        if (min != i) swap(&A[i], &A[min]);
+    }
+}
+
 #define test
 
 #if defined test
@@ -112,7 +122,8 @@ int compare(SortType a, SortType b) {
 
 int main(void) {
     int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
-    QuickSort(a, 8, compare);
+    // QuickSort(a, 8, compare);
+    SelectSort(a, 8, compare);
     int i;
     for (i = 0; i < 8; i++) {
         printf("%-3d", a[i]);
