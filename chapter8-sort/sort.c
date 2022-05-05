@@ -1,6 +1,7 @@
 #include "sort.h"
 
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 void swap(SortType *a, SortType *b) {
@@ -96,5 +97,27 @@ void QSort(SortType A[], int low, int high,
 }
 
 void QuickSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
-    QSort(A, 0, n, compare);
+    QSort(A, 0, n - 1, compare);
 }
+
+#define test
+
+#if defined test
+
+int compare(SortType a, SortType b) {
+    if (a == b) return EQUAL;
+    if (a < b) return SMALL;
+    if (a > b) return BIG;
+}
+
+int main(void) {
+    int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
+    QuickSort(a, 8, compare);
+    int i;
+    for (i = 0; i < 8; i++) {
+        printf("%-3d", a[i]);
+    }
+    putchar('\n');
+}
+
+#endif
