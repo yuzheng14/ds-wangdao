@@ -1,5 +1,7 @@
 #include "sort.h"
 
+#include <stdbool.h>
+
 void swap(SortType *a, SortType *b) {
     SortType temp = *a;
     *a = *b;
@@ -53,4 +55,20 @@ void ShellSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
             }  // if
         }      // for i
     }          // for d
+}
+
+void BubbleSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    int i, j;
+    bool flag = true;
+    // 控制循环次数
+    for (i = 0; i < n - 1 && flag; i++) {
+        flag = false;
+        // 控制对比
+        for (j = n - 1; j > i; j--) {
+            if (compare(A[j - 1], A[j]) == BIG) {
+                swap(&A[j - 1], &A[j]);
+                flag = true;
+            }
+        }
+    }
 }

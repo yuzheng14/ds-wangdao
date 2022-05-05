@@ -3,6 +3,14 @@
         "string.h": "c",
         "linkqueue.h": "c",
         "limits.h": "c",
-        "listack.h": "c"
+        "listack.h": "c",
+        "array": "c",
+        "*.tcc": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "functional": "c",
+        "tuple": "c"
     }
 }

@@ -14,5 +14,7 @@ void BinaryInsertSort(SortType A[], int n,
                       int (*compare)(SortType a, SortType b));
 // 希尔排序
 void ShellSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
+// 冒泡排序
+void BubbleSort(SortType A[],int n,int (*compare)(SortType a, SortType b));
 
 #endif
