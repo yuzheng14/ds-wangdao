@@ -8,8 +8,11 @@
 typedef int SortType;
 
 // 直接插入排序
-void InsertSort(SortType A[],int n,int (*compare)(SortType a,SortType b));
+void InsertSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 // 折半插入排序（直接插入排序的优化）
-void BinaryInsertSort(SortType A[],int n,int (*compare)(SortType a,SortType b));
+void BinaryInsertSort(SortType A[], int n,
+                      int (*compare)(SortType a, SortType b));
+// 希尔排序
+void ShellSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 
 #endif

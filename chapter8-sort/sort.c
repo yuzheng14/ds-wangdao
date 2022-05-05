@@ -39,3 +39,18 @@ void BinaryInsertSort(SortType A[], int n,
         A[low] = temp;
     }
 }
+
+void ShellSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    int i, j, d;
+    SortType temp;
+    for (d = n / 2; d >= 1; d /= 2) {
+        for (i = d; i < n; i++) {
+            if (compare(A[i], A[i - d]) == SMALL) {
+                temp = A[i];
+                for (j = i - d; j >= 0 && compare(A[j], temp) == BIG; j -= d)
+                    A[j + d] = A[j];
+                A[j + d] = temp;
+            }  // if
+        }      // for i
+    }          // for d
+}
