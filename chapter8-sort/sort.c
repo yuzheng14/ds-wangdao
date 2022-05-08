@@ -110,27 +110,39 @@ void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
     }
 }
 
+// 对堆进行调整
+// k 为堆中元素的索引
+// len 为堆的元素个数（长度）
 void HeapAdjust(int A[], int k, int len,
                 int (*compare)(SortType a, SortType b)) {
+    // 暂存要调整的数据
     A[0] = A[k];
     int i;
+    // 遍历子树
     for (i = 2 * k; i <= len; i *= 2) {
+        // 找到左孩子和右孩子中关键值较大的
         if (i < len && compare(A[i], A[i + 1]) == SMALL) i++;
+        // 如果要调整数据的关键值比孩子中最大的还大，则退出循环
         if (A[0] >= A[i]) break;
+        // 交换数据，并移动指针
         A[k] = A[i];
         k = i;
     }
+    // 将要调整的元素插入
     A[k] = A[0];
 }
 
+// 将数组构建为堆
 void BuildMaxHeap(int A[], int len, int (*compare)(SortType a, SortType b)) {
     int i;
     for (i = len / 2; i > 0; i--) HeapAdjust(A, i, len, compare);
 }
 
 void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    // 建堆
     BuildMaxHeap(A, n, compare);
     int i;
+    // 堆中最大的元素和最后一个元素交换，然后调整堆
     for (i = n; i > 1; i--) {
         swap(&A[1], &A[i]);
         HeapAdjust(A, 1, i - 1, compare);
