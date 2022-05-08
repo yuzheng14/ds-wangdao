@@ -20,5 +20,8 @@ void BubbleSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 void QuickSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 // 选择排序
 void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
+// 堆排序
+// 数组第一个用于暂存数据
+void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 
 #endif

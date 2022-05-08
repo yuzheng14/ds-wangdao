@@ -110,6 +110,33 @@ void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
     }
 }
 
+void HeapAdjust(int A[], int k, int len,
+                int (*compare)(SortType a, SortType b)) {
+    A[0] = A[k];
+    int i;
+    for (i = 2 * k; i <= len; i *= 2) {
+        if (i < len && compare(A[i], A[i + 1]) == SMALL) i++;
+        if (A[0] >= A[i]) break;
+        A[k] = A[i];
+        k = i;
+    }
+    A[k] = A[0];
+}
+
+void BuildMaxHeap(int A[], int len, int (*compare)(SortType a, SortType b)) {
+    int i;
+    for (i = len / 2; i > 0; i--) HeapAdjust(A, i, len, compare);
+}
+
+void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
+    BuildMaxHeap(A, n, compare);
+    int i;
+    for (i = n; i > 1; i--) {
+        swap(&A[1], &A[i]);
+        HeapAdjust(A, 1, i - 1, compare);
+    }
+}
+
 #define test
 
 #if defined test
@@ -121,11 +148,15 @@ int compare(SortType a, SortType b) {
 }
 
 int main(void) {
-    int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
+    // int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
+    int a[] = {0, 49, 28, 65, 97, 76, 13, 27, 49};
     // QuickSort(a, 8, compare);
-    SelectSort(a, 8, compare);
+    // SelectSort(a, 8, compare);
+
+    HeapSort(a, 8, compare);
     int i;
-    for (i = 0; i < 8; i++) {
+    // for (i = 0; i < 8; i++) {
+    for (i = 1; i <= 8; i++) {
         printf("%-3d", a[i]);
     }
     putchar('\n');
