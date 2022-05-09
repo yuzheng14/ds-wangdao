@@ -25,5 +25,7 @@ void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 // 归并排序
 void MergeSort(SortType A[], int len, int (*compare)(SortType a, SortType b));
+// 归并排序，非递归实现
+void MergeSort2(SortType A[], int len, int (*compare)(SortType a, SortType b));
 
 #endif
