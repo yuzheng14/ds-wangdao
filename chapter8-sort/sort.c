@@ -151,33 +151,46 @@ void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
 
 int *B;
 
+// [low,mid],[mid+1,high]进行归并
 void Merge(SortType A[], int low, int mid, int high,
            int (*compare)(SortType a, SortType b)) {
     int i, j, k;
+    // 将要归并的元素复制到辅助数组
     for (i = low; i <= high; i++) B[i] = A[i];
+    // 进行归并
     for (i = k = low, j = mid + 1; i <= mid && j <= high; k++) {
+        // 进行对比，如果，取小的数并入数组
         if (compare(B[i], B[j]) != BIG)
             A[k] = B[i++];
         else
             A[k] = B[j++];
     }
+    // 如果[low,mid]中还有元素未被并入数组
     while (i <= mid) A[k++] = B[i++];
+    // 如果[mid+1,high]中还有元素未被并入数组
     while (j <= high) A[k++] = B[j++];
 }
 
 void MSort(SortType A[], int low, int high,
            int (*compare)(SortType a, SortType b)) {
     if (low < high) {
+        // 计算中点
         int mid = low / 2 + high / 2;
+        // 对[low,mid]进行归并
         MSort(A, low, mid, compare);
+        // 对[mid+1,high]进行归并
         MSort(A, mid + 1, high, compare);
+        // [low,mid],[mid+1,high]归并各自有序后进行归并
         Merge(A, low, mid, high, compare);
     }
 }
 
 void MergeSort(SortType A[], int len, int (*compare)(SortType a, SortType b)) {
+    // 如果辅助队列已经有定义，则释放
     if (B) free(B);
+    // 申请空间
     B = (int *)malloc(len * sizeof(int));
+    // 开始归并
     MSort(A, 0, len - 1, compare);
 }
 
