@@ -196,15 +196,19 @@ void MergeSort(SortType A[], int len, int (*compare)(SortType a, SortType b)) {
 
 void MergeSort2(SortType A[], int len, int (*compare)(SortType a, SortType b)) {
     int i, j, k;
+    // 初始化辅助数组
     if (B) free(B);
     B = (int *)malloc(len * sizeof(int));
+    // k 为一趟排序中排好序的最小单元
     k = 1;
     while (k < len) {
         i = 0;
+        // 循环对每两组排好序的单元进行归并
         while (i < len - 2 * k + 1) {
             Merge(A, i, i + k - 1, i + 2 * k - 1, compare);
             i = i + 2 * k;
         }
+        // 如果最后剩余单元大于 1 但小于 2
         if (i < len - k + 1) Merge(A, i, i + k - 1, len - 1, compare);
         k *= 2;
     }
