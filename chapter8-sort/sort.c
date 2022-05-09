@@ -149,6 +149,38 @@ void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b)) {
     }
 }
 
+int *B;
+
+void Merge(SortType A[], int low, int mid, int high,
+           int (*compare)(SortType a, SortType b)) {
+    int i, j, k;
+    for (i = low; i <= high; i++) B[i] = A[i];
+    for (i = k = low, j = mid + 1; i <= mid && j <= high; k++) {
+        if (compare(B[i], B[j]) != BIG)
+            A[k] = B[i++];
+        else
+            A[k] = B[j++];
+    }
+    while (i <= mid) A[k++] = B[i++];
+    while (j <= high) A[k++] = B[j++];
+}
+
+void MSort(SortType A[], int low, int high,
+           int (*compare)(SortType a, SortType b)) {
+    if (low < high) {
+        int mid = low / 2 + high / 2;
+        MSort(A, low, mid, compare);
+        MSort(A, mid + 1, high, compare);
+        Merge(A, low, mid, high, compare);
+    }
+}
+
+void MergeSort(SortType A[], int len, int (*compare)(SortType a, SortType b)) {
+    if (B) free(B);
+    B = (int *)malloc(len * sizeof(int));
+    MSort(A, 0, len - 1, compare);
+}
+
 #define test
 
 #if defined test
@@ -160,15 +192,17 @@ int compare(SortType a, SortType b) {
 }
 
 int main(void) {
-    // int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
-    int a[] = {0, 49, 28, 65, 97, 76, 13, 27, 49};
+    int a[] = {49, 28, 65, 97, 76, 13, 27, 49};
+    // int a[] = {0, 49, 28, 65, 97, 76, 13, 27, 49};
     // QuickSort(a, 8, compare);
     // SelectSort(a, 8, compare);
 
-    HeapSort(a, 8, compare);
+    // HeapSort(a, 8, compare);
+
+    MergeSort(a, 8, compare);
     int i;
-    // for (i = 0; i < 8; i++) {
-    for (i = 1; i <= 8; i++) {
+    for (i = 0; i < 8; i++) {
+        // for (i = 1; i <= 8; i++) {
         printf("%-3d", a[i]);
     }
     putchar('\n');

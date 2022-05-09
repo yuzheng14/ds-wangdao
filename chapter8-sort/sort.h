@@ -23,5 +23,7 @@ void SelectSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
 // 堆排序
 // 数组第一个用于暂存数据
 void HeapSort(SortType A[], int n, int (*compare)(SortType a, SortType b));
+// 归并排序
+void MergeSort(SortType A[], int len, int (*compare)(SortType a, SortType b));
 
 #endif
